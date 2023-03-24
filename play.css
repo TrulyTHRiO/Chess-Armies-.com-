@@ -1,0 +1,132 @@
+body {
+    background-color: rgb(63, 63, 63);
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: aliceblue;
+    overflow-y: hidden;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+}
+
+#codeDisplay {
+    display: flex;
+    width: 100vw;
+    height: 10vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#code {
+    font-weight: 800;
+    font-size: 5vh;
+}
+
+#gameContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+#boardContainer {
+    top: 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    height: 90vh;
+    width: 60vw;
+    padding: 0;
+    margin: 0;
+}
+
+#team1 {
+    position: absolute;
+    left: 0;
+}
+
+#team2 {
+    position: absolute;
+    right: 0;
+}
+
+.teamBox {
+    display: flex;
+    justify-content: center;
+    padding: 2em;
+    height: 90vh;
+    width: 20vw;
+    background-color: wheat;
+    box-sizing: border-box;
+}
+
+.joinTeamButton {
+    color: white;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    width: 100%;
+    height: 60px;
+    transition: 0.1s;
+}
+
+#joinTeam1 {
+    background-color: cadetblue;
+}
+
+#joinTeam2 {
+    background-color: coral;
+}
+
+#joinTeam1:hover,#joinTeam2:hover { /* does not work with .joinTeamButton:hover {} */
+    background-color: blanchedalmond;
+    color: black;
+}
+
+.tile {
+    user-select: none;
+    /* width: 5em; */
+    width: 10vh;
+    height: 10vh;
+    padding: 0;
+}
+
+.black {
+    background-color: rgb(165, 112, 42);
+}
+
+.white {
+    background-color: burlywood;
+}
+
+.selected {
+    background-color: red;
+    opacity: 40%;
+}
+
+.rot {
+    transform: rotate(180deg);
+    float: left;
+}
+
+.piece {
+    width: 80%;
+    height: 80%;
+    margin: 10%;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+#board {
+    display: grid;
+    /* width: min-content; */
+    /* grid-template-columns: repeat(8, 80px);
+    gap: 0; */
+}
+
+#turnChange {
+    visibility: hidden
+}
