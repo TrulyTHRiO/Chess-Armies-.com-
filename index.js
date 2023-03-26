@@ -1,4 +1,4 @@
-const server = new WebSocket("wss://localhost:5072");
+const server = new WebSocket("wss://82.20.58.71:5072");
 
 const joinGame = document.getElementById("joinGame")
 const codeField = document.getElementById("codeField")
