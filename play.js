@@ -16,9 +16,9 @@ function getCookies() {
     var UUID = cookies.UUID
     var gameCode = cookies.gameCode
     if (UUID == undefined || gameCode == undefined) {
-//         window.location.href = "https://chessarmies.com/"
-        console.log("redirect")
+        window.location.href = "https://chessarmies.com/"
     } else {
+        document.getElementById("code").innerHTML = gameCode
         var sendReq = true
     }
 }
@@ -33,6 +33,12 @@ function requestGame() {
 
 document.getElementById("joinTeam1").onclick = document.getElementById("joinTeam2").onclick = function() {
     console.log(this.id)
+    let request = {
+        requestType: "JOINTEAM",
+        team: this.id,
+    }
+    currentTurn = (this.id == "joinTeam1" ? "w" : "b")
+    server.send(JSON.stringify(request))
 }
 
 server.onopen = function(event) {
@@ -43,6 +49,7 @@ server.onopen = function(event) {
             gameCode: gameCode,
         }
         server.send(JSON.stringify(request))
+        requestGame()
     }
     server.onmessage = function(data) {
         let parseData = JSON.parse(data.data)

@@ -1,4 +1,4 @@
-const server = new WebSocket("wss://82.20.58.71:5072");
+const server = new WebSocket("wss://localhost:5072");
 
 const joinGame = document.getElementById("joinGame")
 const codeField = document.getElementById("codeField")
@@ -99,7 +99,7 @@ server.onopen = function(event) {
             case "JOINGAME": {
                 createGameCookie(parseData.gameCode, "gameCode")
                 createGameCookie(parseData.UUID, "UUID")
-                window.location.href = "https://chessarmies.com/play.html"
+                window.location.href = "https://chessarmies.com/play/"
                 break
             }
             case "NOGAMEFOUND": {
