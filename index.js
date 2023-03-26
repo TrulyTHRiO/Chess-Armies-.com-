@@ -99,7 +99,7 @@ server.onopen = function(event) {
             case "JOINGAME": {
                 createGameCookie(parseData.gameCode, "gameCode")
                 createGameCookie(parseData.UUID, "UUID")
-                window.location.href = "https://chessarmies.com/play/"
+                window.location.href = "https://chessarmies.com/play.html/"
                 break
             }
             case "NOGAMEFOUND": {
