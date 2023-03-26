@@ -15,7 +15,7 @@ function getCookies() {
     var cookies = getCookies()
     var UUID = cookies.UUID
     var gameCode = cookies.gameCode
-    if (UUID != undefined || gameCode != undefined) {
+    if (UUID == undefined || gameCode == undefined) {
         window.location.href = "https://chessarmies.com/"
     } else {
         var sendReq = true
