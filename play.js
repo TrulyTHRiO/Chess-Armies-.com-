@@ -39,8 +39,8 @@ server.onopen = function(event) {
     if (sendReq == true) {
         let request = {
             requestType: "ASSIGNCLIENT",
-            UUID: "bassl",
-            gameCode: "gameCode",
+            UUID: UUID,
+            gameCode: gameCode,
         }
         server.send(JSON.stringify(request))
     }
