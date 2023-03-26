@@ -16,7 +16,8 @@ function getCookies() {
     var UUID = cookies.UUID
     var gameCode = cookies.gameCode
     if (UUID == undefined || gameCode == undefined) {
-        window.location.href = "https://chessarmies.com/"
+//         window.location.href = "https://chessarmies.com/"
+        console.log("redirect")
     } else {
         var sendReq = true
     }
