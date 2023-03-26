@@ -1,6 +1,6 @@
 function getCookies() {
     let cookies = document.cookie
-    let splitCookies = cookies.split(";")
+    let splitCookies = cookies.split("; ")
     var parseCookies = {}
     splitCookies.forEach(function(i) {
         console.log(i)
