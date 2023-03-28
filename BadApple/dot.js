@@ -76,7 +76,7 @@ function CreateTiles(playerCol) {
             }
         }
     }
-    document.getElementById("board").setAttribute("style", "grid-template-columns: repeat("+ boardSize + ", min-content)")
+    document.getElementById("board").setAttribute("style", "grid-template-columns: repeat("+ boardSize + ", min-content)");
 
 }
 
@@ -238,4 +238,4 @@ for (let i = 0; i < divs.length; ++i) {
 // }
 // console.log(vid[0])
 console.log(badArr64)
-BadAppleify(0, badArr64)
+BadAppleify(0, rickArr64)
