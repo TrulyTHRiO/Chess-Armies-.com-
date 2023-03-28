@@ -4,21 +4,24 @@ body {
 
 .tile {
     user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .black {
     background-color: rgb(165, 112, 42);
     /* width: 5em; */
-    width: 12vh;
-    height: 12vh;
+    /* width: 12vh;
+    height: 12vh; */
     padding: 0;
 }
 
 .white {
     background-color: burlywood;
     /* width: 5em; */
-    width: 12vh;
-    height: 12vh;
+    /* width: 12vh;
+    height: 12vh; */
     padding: 0;
 }
 
@@ -36,8 +39,10 @@ body {
     width: 80%;
     height: 80%;
     margin: 10%;
+    position: relative;
     -webkit-user-drag: none;
     user-select: none;
+    top: 0;
 }
 
 #board {
