@@ -76,7 +76,7 @@ function CreateTiles(playerCol) {
             }
         }
     }
-    document.getElementById("board").setAttribute("style", "grid-template-columns: repeat("+ boardSize + ", min-content)");
+    document.getElementById("board").setAttribute("style", "grid-template-columns: repeat("+ boardSize + ", "+(100-10)/boardSize+"vh";
 
 }
 
