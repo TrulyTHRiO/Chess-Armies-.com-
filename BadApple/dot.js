@@ -7,6 +7,7 @@ const boardPieces = "rnbqkbnrpppppppp-------------------------------------------
 currentTurn = "w"
 // const boardPieces = "RNBQKBNRPPPPPPPP--------------------------------pppppppprnbqkbnr"
 const boardSize = Math.sqrt(boardColours.length)
+const tileMax = (document.documentElement.clientWidth > document.documentElement.clientHeight ? "vh" : "vw")
 boardArr = new Array(boardSize)
 for (let i = 0; i < boardSize; i++) {
   boardArr[i] = new Array(boardSize)
@@ -63,7 +64,7 @@ function CreateTiles(playerCol) {
             } else {
                 tile.classList.add("white")
             }
-            tile.setAttribute("style", "height: "+(100-10)/boardSize+"vh; width: "+(100-10)/boardSize+"vh")
+            tile.setAttribute("style", "height: "+(100-10)/boardSize+tileMax+"; width: "+(100-10)/boardSize+tileMax)
             pos = [alphabet[i2],(boardSize-i1)]
             tile.setAttribute("id", pos)
             boardArr[i2][boardSize-i1-1] = CreatePiece(boardPieces[i1*boardSize+i2], pos)
