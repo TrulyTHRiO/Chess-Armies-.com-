@@ -1,4 +1,4 @@
-const server = new WebSocket("wss://82.20.58.71:5072");
+const server = new WebSocket("wss://home.chessarmies.com:5072");
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
 const boardColours = "wbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbw"
