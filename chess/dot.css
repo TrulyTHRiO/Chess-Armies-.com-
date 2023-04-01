@@ -1,0 +1,58 @@
+body {
+    background-color: green;
+}
+
+.tile {
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.black {
+    background-color: rgb(165, 112, 42);
+    /* width: 5em; */
+    /* width: 12vh;
+    height: 12vh; */
+    padding: 0;
+}
+
+.white {
+    background-color: burlywood;
+    /* width: 5em; */
+    /* width: 12vh;
+    height: 12vh; */
+    padding: 0;
+}
+
+.selected {
+    background-color: red;
+    opacity: 40%;
+}
+
+.rot {
+    transform: rotate(180deg);
+    float: left;
+}
+
+.piece {
+    width: 80%;
+    height: 80%;
+    margin: 10%;
+    position: relative;
+    -webkit-user-drag: none;
+    user-select: none;
+    top: 0;
+}
+
+#board {
+    display: grid;
+    /* flex-wrap: wrap; */
+    /* width: min-content; */
+    /* grid-template-columns: repeat(8, 80px);
+    gap: 0; */
+}
+
+#turnChange {
+    visibility: hidden
+}
