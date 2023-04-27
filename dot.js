@@ -1,27 +1,29 @@
-const server = new WebSocket("wss://home.chessarmies.com:5072");
+const server = new WebSocket("wss://home.chessarmies.com:5072"); // 82.20.58.71
 
-const alphabet = "abcdefghijklmnopqrstuvwxyz"
+const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZαβγδεζηθικλμνξοπρστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ"
 const boardColours = "wbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbw"
 const boardPieces = "rnbqkbnrpppppppp--------------------------------PPPPPPPPRNBQKBNR"
 currentTurn = "w"
 // const boardPieces = "RNBQKBNRPPPPPPPP--------------------------------pppppppprnbqkbnr"
 const boardSize = Math.sqrt(boardColours.length)
+const tileMax = (document.documentElement.clientWidth > document.documentElement.clientHeight ? "vh" : "vw")
+
 boardArr = new Array(boardSize)
 for (let i = 0; i < boardSize; i++) {
   boardArr[i] = new Array(boardSize)
 }
 selectedTile = null
 
-console.log(boardArr)
+////// console.log(boardArr)
 
-class tile {
+// class tile {
 
-    constructor(tile, piece) {
-        this.pos = tile
-        this.piece = piece
-    }
+//     constructor(tile, piece) {
+//         this.pos = tile
+//         this.piece = piece
+//     }
 
-}
+// }
 
 function CreateTiles(playerCol) {
     if (playerCol == "b") {
@@ -30,7 +32,7 @@ function CreateTiles(playerCol) {
     for (let i1 = 0; i1 < boardSize; i1++) {
         for (let i2 = 0; i2 < boardSize; i2++) {
             let col = boardColours[i1*boardSize+i2]
-            console.log(col)
+            ////// console.log(col)
             tile = document.createElement("div")
             tile.classList.add("tile")
             if (col == "b") {
@@ -38,19 +40,22 @@ function CreateTiles(playerCol) {
             } else {
                 tile.classList.add("white")
             }
-            pos = alphabet[i2]+(boardSize-i1)
+            tile.setAttribute("style", "height: "+(100-10)/boardSize+tileMax+"; width: "+(100-10)/boardSize+tileMax)
+            pos = [alphabet[i2],(boardSize-i1)]
             tile.setAttribute("id", pos)
             boardArr[i2][boardSize-i1-1] = CreatePiece(boardPieces[i1*boardSize+i2], pos)
             // boardArr[i2][i1] = CreatePiece(boardPieces[i1*boardSize+i2], pos)
             document.getElementById("board").appendChild(tile)
             if (boardArr[i2][boardSize-i1-1] != null) {
-                console.log((alphabet[i2]+(boardSize-i1-1)))
-                console.log(alphabet.indexOf((alphabet[i2]+(i1+1))[0]),(alphabet[i2]+(i1+1))[1]-1)
-                UpdateImage((alphabet[i2]+(boardSize-i1)))
+                ////// console.log((alphabet[i2]+(boardSize-i1-1)))
+                ////// console.log(alphabet.indexOf((alphabet[i2]+(i1+1))[0]),(alphabet[i2]+(i1+1))[1]-1)
+                UpdateImage(([alphabet[i2],(boardSize-i1)]))
             }
         }
     }
     document.getElementById("board").setAttribute("style", "grid-template-columns: repeat("+ boardSize + ", min-content)");
+    // document.getElementById("board").setAttribute("style", "height: "+(100-10)+tileMax+"; width: "+(100-10)+tileMax+";");
+
 }
 
 function CreatePiece(piece, tile) {
@@ -84,14 +89,22 @@ function CreatePiece(piece, tile) {
     }
 }
 
-function MovePiece(piece, tile) {
-    console.log(Math.abs(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0])), "ban")
+function RequestMovePiece(piece, tile) {
+    request = {
+        requestType: "MOVEPIECE",
+        from: piece.pos,
+        to: tile,
+    }
+}
+
+function MovePiece(piece, tile, castle) {
+    ////// console.log(Math.abs(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0])), "ban")
     document.getElementById(piece.pos).innerHTML = ""
     if ((piece instanceof king) ? (Math.abs(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0])) > 1) : false) {
-        // console.log("nba")
+        // ////// console.log("nba")
         // if (Math.sign(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0])) == 1) {
         //     boardArr[0][piece.pos[1]-1].turnMovable = false
-        //     console.log("filerr")
+        //     ////// console.log("filerr")
         //     boardArr[0][piece.pos[1]-1].pos = "d"+String(piece.pos[1]) //alphabet[alphabet.indexOf(piece.pos[0])+Math.sign(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0]))*-1]
         // } else {
         //     boardArr[7][piece.pos[1]-1].turnMovable = false
@@ -104,16 +117,16 @@ function MovePiece(piece, tile) {
         //     boardArr[7][piece.pos[1]-1] = null
         // }
         // document.getElementById(Math.sign(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0])) === 1 ? "a"+piece.pos[1] : "h"+piece.pos[1]).innerHTML = ""
-        // console.log(boardArr[0][piece.pos[1]], "ahasasdasda")
-        // console.log(alphabet[alphabet.indexOf(piece.pos[0])+Math.sign(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0]))*-1]+String(piece.pos[1]))
+        // ////// console.log(boardArr[0][piece.pos[1]], "ahasasdasda")
+        // ////// console.log(alphabet[alphabet.indexOf(piece.pos[0])+Math.sign(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0]))*-1]+String(piece.pos[1]))
         // UpdateImage(alphabet[alphabet.indexOf(piece.pos[0])+Math.sign(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0]))*-1]+String(piece.pos[1]))
-        // console.log(boardArr[alphabet.indexOf(piece.pos[0])+Math.sign(alphabet.indexOf(tile[0])-alphabet.indexOf(piece.pos[0]))*2][piece.pos[1]-1])
+        // ////// console.log(boardArr[alphabet.indexOf(piece.pos[0])+Math.sign(alphabet.indexOf(tile[0])-alphabet.indexOf(piece.pos[0]))*2][piece.pos[1]-1])
         // boardArr[alphabet.indexOf(piece.pos[0])+Math.sign(alphabet.indexOf(tile[0])-alphabet.indexOf(piece.pos[0]))*2][piece.pos[1]-1] = piece
-        // console.log(alphabet[alphabet.indexOf(piece.pos[0])+Math.sign(alphabet.indexOf(tile[0])-alphabet.indexOf(piece.pos[0]))*2]+String(piece.pos[1]))
+        // ////// console.log(alphabet[alphabet.indexOf(piece.pos[0])+Math.sign(alphabet.indexOf(tile[0])-alphabet.indexOf(piece.pos[0]))*2]+String(piece.pos[1]))
         // UpdateImage(alphabet[alphabet.indexOf(piece.pos[0])+Math.sign(alphabet.indexOf(tile[0])-alphabet.indexOf(piece.pos[0]))*2]+String(piece.pos[1]))
         // boardArr[alphabet.indexOf(piece.pos[0])][piece.pos[1]-1] = null
         // if (Math.sign(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0])) == 1) {
-        //     console.log(alphabet[alphabet.indexOf(piece.pos[0])+Math.sign(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0]))*-2]+String(piece.pos[1]),"googa")
+        //     ////// console.log(alphabet[alphabet.indexOf(piece.pos[0])+Math.sign(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0]))*-2]+String(piece.pos[1]),"googa")
         //     boardArr[2][piece.pos[1]-1].pos = alphabet[alphabet.indexOf(piece.pos[0])+Math.sign(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0]))*-2]+String(piece.pos[1])
         // } else {
         //     boardArr[6][piece.pos[1]-1].pos = alphabet[alphabet.indexOf(piece.pos[0])+Math.sign(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0]))*-2]+String(piece.pos[1])
@@ -128,11 +141,14 @@ function MovePiece(piece, tile) {
     if (document.getElementById("board").classList.contains("rot")) {
         document.getElementById(piece.pos).classList.remove("rot")
     } else {
-        document.getElementById(piece.pos).classList.add("rot")
+        console.log(piece.pos, document.getElementById(piece.pos).innerHTML)
+        document.getElementById(piece.pos).children[0].classList.add("rot")
     }
 }
 
 function UpdateImage(tile) {
+    ////// console.log(tile)
+    // ////// console.log('<img class="piece" src="'+boardArr[alphabet.indexOf(tile[0])][tile[1]-1].img+'" style="height: '+(100-10)/boardSize+tileMax+'; width: '+(100-10)/boardSize+tileMax+'></img>')
     document.getElementById(tile).innerHTML = '<img class="piece" src="'+boardArr[alphabet.indexOf(tile[0])][tile[1]-1].img+'"></img>'
 }
 
@@ -142,20 +158,25 @@ var divs = document.querySelectorAll(".tile")
 
 for (let i = 0; i < divs.length; ++i) {
     divs[i].onclick = function() {
+        var thisID = this.id.split(",")
+        ////// console.log(thisID)
+        ////// console.log(divs[i], '@@@@@@@@@@@@@@@@@@@@@@@@@@')
         if (selectedTile != null) {
             document.getElementById(selectedTile.pos).classList.remove("selected")
-            if (selectedTile == boardArr[alphabet.indexOf(this.id[0])][this.id[1]-1]) {
+            ////// console.log(selectedTile, "@@@@@@@@@@@@@@@@@@@@pooof")
+            if (selectedTile == boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]) {
                 selectedTile = null
-            } else if (selectedTile.ValidateMove(this.id)) {
+            } else if (selectedTile.ValidateMove(thisID)) {
                 if (selectedTile.turnMovable) {
-                    MovePiece(selectedTile, this.id)
+                    ////// console.log("console dot ,ol bsadf @@@@@@@@@@@@@@@@@@@@@")
+                    MovePiece(selectedTile, thisID)
                 }
-                console.log(this.id)
+                ////// console.log(thisID)
                 selectedTile = null
-            } else if (boardArr[alphabet.indexOf(this.id[0])][this.id[1]-1]) {
-                console.log(boardArr[alphabet.indexOf(this.id[0])][this.id[1]-1])
-                if ((boardArr[alphabet.indexOf(this.id[0])][this.id[1]-1]).colour == currentTurn) {
-                    selectedTile = boardArr[alphabet.indexOf(this.id[0])][this.id[1]-1]
+            } else if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]) {
+                ////// console.log(boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1])
+                if ((boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]).colour == currentTurn) {
+                    selectedTile = boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]
                     this.classList.add("selected")
                 } else {
                     selectedTile = null
@@ -163,10 +184,10 @@ for (let i = 0; i < divs.length; ++i) {
             } else {
                 selectedTile = null
             }
-        } else if (boardArr[alphabet.indexOf(this.id[0])][this.id[1]-1]){
-            console.log(boardArr[alphabet.indexOf(this.id[0])][this.id[1]-1])
-            if ((boardArr[alphabet.indexOf(this.id[0])][this.id[1]-1]).colour == currentTurn) {
-                selectedTile = boardArr[alphabet.indexOf(this.id[0])][this.id[1]-1]
+        } else if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]){
+            ////// console.log(boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1])
+            if ((boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]).colour == currentTurn) {
+                selectedTile = boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]
                 this.classList.add("selected")
             }
         }
@@ -195,3 +216,5 @@ for (let i = 0; i < divs.length; ++i) {
 //         }
 //     }
 // }
+// ////// console.log(vid[0])
+// ////// console.log(badArr64)

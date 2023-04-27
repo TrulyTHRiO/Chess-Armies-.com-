@@ -2,9 +2,10 @@ function getCookies() {
     let cookies = document.cookie
     let splitCookies = cookies.split("; ")
     var parseCookies = {}
-    splitCookies.forEach(function(i) {
-        console.log(i)
-        parseCookies[i.split("=")[0]] = i.split("=")[1]
+    splitCookies.forEach(function(element) {
+        console.log(element)
+        element = (element.replace("=", ";")).split(";") // split on only the first "="
+        parseCookies[element[0]] = element[1]
     })
     console.log(parseCookies)
     return parseCookies
