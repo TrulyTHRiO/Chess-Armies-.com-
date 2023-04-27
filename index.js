@@ -34,8 +34,6 @@ function JoinGameHandler() {
     if (response.responseType == "NOGAMEFOUND") {
         incorrectCode()
     } else {
-        createGameCookie(response.gameCode, "gameCode")
-        createGameCookie(response.UUID, "UUID")
         window.location.href = "https://chessarmies.com/play/"
     }
 }
