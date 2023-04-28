@@ -58,6 +58,8 @@ server.onopen = function(event) {
         console.log(parseData)
         switch (parseData.responseType) {
             case "GAMEOBJECT": {
+                boardArr = parseData.boardArr
+                CreateTiles("w")
                 let team1 = parseData.team1
                 team1.forEach(function(nickname){
                     let nameDOM = document.createElement("p")
@@ -67,7 +69,7 @@ server.onopen = function(event) {
                     document.getElementById("team1").appendChild(nameDOM)
                 })
                 let team2 = parseData.team2
-                team1.forEach(function(nickname){
+                team2.forEach(function(nickname){
                     let nameDOM = document.createElement("p")
                     nameDOM.id = nickname
                     nameDOM.innerHTML = nickname
@@ -93,6 +95,19 @@ server.onopen = function(event) {
                 nameDOM.innerHTML = nickname
                 nameDOM.classList.add("nickname")
                 document.getElementById(team).appendChild(nameDOM)
+                if (true) { //nickname == playerNickname) {
+                    if (team == "team1") {
+                        document.getElementById("board").classList.remove("rot")
+                        for (let i = 0; i < divs.length; ++i) {
+                            divs[i].classList.remove("rot")
+                        }
+                    } else {
+                        document.getElementById("board").classList.add("rot")
+                        for (let i = 0; i < divs.length; ++i) {
+                            divs[i].classList.add("rot")
+                        }
+                    }
+                }
                 break
             }
         }
