@@ -1,5 +1,3 @@
-import { nextTick } from "process"
-
 function GetCookies() {
     let cookies = document.cookie
     let splitCookies = cookies.split("; ")
