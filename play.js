@@ -73,7 +73,10 @@ server.onopen = function(event) {
                             // })
                             document.getElementById(nickname.remove())
                         }
-                document.getElementById(team).appendChild((document.createElement("p").id=nickname).innerHTML=nickname)
+                let name = document.createElement("p")
+                name.id = nickname
+                name.innerHTML = nickname
+                document.getElementById(team).appendChild(name)
                 break
             }
         }
