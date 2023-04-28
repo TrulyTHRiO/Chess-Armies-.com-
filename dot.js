@@ -154,7 +154,7 @@ function UpdateImage(tile) {
 
 // CreateTiles("w")
 
-var divs = document.querySelectorAll(".tile")
+divs = document.querySelectorAll(".tile")
 
 for (let i = 0; i < divs.length; ++i) {
     divs[i].onclick = function() {
