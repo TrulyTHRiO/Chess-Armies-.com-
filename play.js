@@ -63,7 +63,7 @@ server.onopen = function(event) {
             }
             case "TEAMCHANGE": {
                 let nickname = parseData.nickname
-                let team = parseData.team
+                let team = (parseData.team == "joinTeam1" ? "team1" : "team2")
                 let oldTeam = parseData.oldTeam
                 if (oldTeam != undefined) {
                     // Array.from(document.getElementById(team).children).forEach(function(element, i) {
@@ -71,7 +71,7 @@ server.onopen = function(event) {
                             //         document.getElementById(team).removeChild(document.getElementById(team.children[i]))
                             //     }
                             // })
-                            document.getElementById(nickname.remove())
+                            document.getElementById(nickname).remove()
                         }
                 let name = document.createElement("p")
                 name.id = nickname
