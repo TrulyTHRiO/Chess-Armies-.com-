@@ -1,4 +1,6 @@
-function getCookies() {
+import { nextTick } from "process"
+
+function GetCookies() {
     let cookies = document.cookie
     let splitCookies = cookies.split("; ")
     var parseCookies = {}
@@ -13,7 +15,7 @@ function getCookies() {
 
 
 {
-    var cookies = getCookies()
+    var cookies = GetCookies()
     var UUID = cookies.UUID
     var gameCode = cookies.gameCode
     if (UUID == undefined || gameCode == undefined) {
@@ -24,7 +26,7 @@ function getCookies() {
     }
 }
 
-function requestGame() {
+function RequestGame() {
     let request = {
         requestType: "REQUESTGAMEOBJECT",
         gameCode: gameCode,
@@ -51,7 +53,7 @@ server.onopen = function(event) {
             gameCode: gameCode,
         }
         server.send(JSON.stringify(request))
-        requestGame()
+        RequestGame()
     }
     server.onmessage = function(data) {
         let parseData = JSON.parse(data.data)
@@ -61,8 +63,19 @@ server.onopen = function(event) {
                 
                 break
             }
-            case "": {
-                
+            case "TEAMCHANGE": {
+                let nickname = parseData.nickname
+                let team = parseData.team
+                let oldTeam = parseData.oldTeam
+                if (oldTeam != undefined) {
+                    // Array.from(document.getElementById(team).children).forEach(function(element, i) {
+                        //     if (element.innerHTML == nickname) {
+                            //         document.getElementById(team).removeChild(document.getElementById(team.children[i]))
+                            //     }
+                            // })
+                            document.getElementById(nickname.remove())
+                        }
+                document.getElementById(team).appendChild("<p id='"+nickname+"'>"+nickname+"</p>")
                 break
             }
         }
