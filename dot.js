@@ -8,10 +8,10 @@ currentTurn = "w"
 const boardSize = Math.sqrt(boardColours.length)
 const tileMax = (document.documentElement.clientWidth > document.documentElement.clientHeight ? "vh" : "vw")
 
-boardArr = new Array(boardSize)
-for (let i = 0; i < boardSize; i++) {
-  boardArr[i] = new Array(boardSize)
-}
+// boardArr = new Array(boardSize)
+// for (let i = 0; i < boardSize; i++) {
+//   boardArr[i] = new Array(boardSize)
+// }
 selectedTile = null
 
 ////// console.log(boardArr)
@@ -132,10 +132,10 @@ function MovePiece(piece, tile, castle) {
         //     boardArr[6][piece.pos[1]-1].pos = alphabet[alphabet.indexOf(piece.pos[0])+Math.sign(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0]))*-2]+String(piece.pos[1])
         // }
     } else {
-    boardArr[alphabet.indexOf(tile[0])][tile[1]-1] = piece
-    boardArr[alphabet.indexOf(piece.pos[0])][piece.pos[1]-1] = null
-    piece.pos = tile
-    UpdateImage(tile)
+        boardArr[alphabet.indexOf(tile[0])][tile[1]-1] = piece
+        boardArr[alphabet.indexOf(piece.pos[0])][piece.pos[1]-1] = null
+        piece.pos = tile
+        UpdateImage(tile)
     }
     piece.turnMovable = false
     if (document.getElementById("board").classList.contains("rot")) {
@@ -152,7 +152,7 @@ function UpdateImage(tile) {
     document.getElementById(tile).innerHTML = '<img class="piece" src="'+boardArr[alphabet.indexOf(tile[0])][tile[1]-1].img+'"></img>'
 }
 
-CreateTiles("w")
+// CreateTiles("w")
 
 var divs = document.querySelectorAll(".tile")
 
