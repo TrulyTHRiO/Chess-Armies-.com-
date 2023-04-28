@@ -17,7 +17,7 @@ function GetCookies() {
     var UUID = cookies.UUID
     var gameCode = cookies.gameCode
     if (UUID == undefined || gameCode == undefined) {
-        window.location.href = "https://chessarmies.com/"
+        // window.location.href = "https://chessarmies.com/"
     } else {
         document.getElementById("code").innerHTML = gameCode
         var sendReq = true
@@ -40,6 +40,15 @@ document.getElementById("joinTeam1").onclick = document.getElementById("joinTeam
         team: this.id,
     }
     currentTurn = (this.id == "joinTeam1" ? "w" : "b")
+    server.send(JSON.stringify(request))
+}
+
+document.getElementById("submitNickname").onclick = function() {
+    let request = {
+        requestType: "UPDATENICKNAME",
+        gameCode: gameCode,
+        nickname: document.getElementById("nicknameField").value,
+    }
     server.send(JSON.stringify(request))
 }
 
@@ -108,6 +117,24 @@ server.onopen = function(event) {
                         }
                     }
                 }
+                break
+            }
+            case "NICKNAMESET": {
+                playerNickname = parseData.nickname
+                document.getElementById("code").innerHTML += " (" + playerNickname + ")"
+                document.getElementById("nicknamePopup").style = "display: none"
+                document.getElementById("boardContainer").style = ""
+                break
+            }
+            case "PLAYERNICKNAME": {
+                playerNickname = parseData.nickname
+                document.getElementById("code").innerHTML += " (" + playerNickname + ")"
+                document.getElementById("nicknamePopup").style = "display: none"
+                document.getElementById("boardContainer").style = ""
+                break
+            }
+            case "INVALIDNICKNAME": {
+                document.getElementById("enterNickname").innerHTML = "INVALID NICKNAME"
                 break
             }
         }

@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="play.css">
 
   <script src="pieces.js" defer></script>
-  <script src="dot.js" defer></script>
+  <script src=".js" defer></script>
   <script src="play.js" defer></script>
 
   <link rel="stylesheet" href="https://use.typekit.net/oov2wcw.css">
@@ -22,7 +22,7 @@
         <div id="team1" class="teamBox">
             <button id="joinTeam1" class="joinTeamButton">JOIN!</button>
         </div>
-        <div id="boardContainer">
+        <div id="boardContainer" style="display:none">
 
             <div id="board">
                 
@@ -30,6 +30,11 @@
             <div id="promotionSelect">
             
             </div>
+        </div>
+        <div id="nicknamePopup">
+            <h1 id="enterNickname">ENTER A NICKNAME</h1>
+            <input id="nicknameField" type="text">
+            <button id="submitNickname" class="joinTeamButton">SUMBIT!</button>
         </div>
         <div id="team2" class="teamBox">
             <button id="joinTeam2" class="joinTeamButton">JOIN!</button>

@@ -82,9 +82,39 @@ html {
     background-color: coral;
 }
 
-#joinTeam1:hover,#joinTeam2:hover { /* does not work with .joinTeamButton:hover {} */
+#joinTeam1:hover,#joinTeam2:hover,#submitNickname:hover { /* does not work with .joinTeamButton:hover {} */
     background-color: blanchedalmond;
     color: black;
+}
+
+#nicknamePopup {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+#enterNickname {
+    margin: 2vh 0 0 0;
+}
+
+#nicknameField {
+    width: 100%;
+    height: 8vh;
+    margin: 0;
+    padding: 0;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    box-sizing: border-box;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 2.5vh;
+}
+
+#submitNickname {
+    background-color: green;
 }
 
 .nickname {
