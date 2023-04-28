@@ -87,16 +87,9 @@ server.onopen = function(event) {
                 })
                 if (team2.includes(playerNickname)) {
                     let divs = document.querySelectorAll(".tile")
-                    if (team == "team1") {
-                        document.getElementById("board").classList.remove("rot")
-                        for (let i = 0; i < divs.length; ++i) {
-                            divs[i].classList.remove("rot")
-                        }
-                    } else {
-                        document.getElementById("board").classList.add("rot")
-                        for (let i = 0; i < divs.length; ++i) {
-                            divs[i].classList.add("rot")
-                        }
+                    document.getElementById("board").classList.add("rot")
+                    for (let i = 0; i < divs.length; ++i) {
+                        divs[i].classList.add("rot")
                     }
                 }
                 break
