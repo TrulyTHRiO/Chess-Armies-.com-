@@ -36,6 +36,7 @@ document.getElementById("joinTeam1").onclick = document.getElementById("joinTeam
     console.log(this.id)
     let request = {
         requestType: "JOINTEAM",
+        gameCode: gameCode,
         team: this.id,
     }
     currentTurn = (this.id == "joinTeam1" ? "w" : "b")
