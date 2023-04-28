@@ -58,7 +58,22 @@ server.onopen = function(event) {
         console.log(parseData)
         switch (parseData.responseType) {
             case "GAMEOBJECT": {
-                
+                let team1 = parseData.team1
+                team1.forEach(function(nickname){
+                    let nameDOM = document.createElement("p")
+                    nameDOM.id = nickname
+                    nameDOM.innerHTML = nickname
+                    nameDOM.classList.add("nickname")
+                    document.getElementById("team1").appendChild(nameDOM)
+                })
+                let team2 = parseData.team2
+                team1.forEach(function(nickname){
+                    let nameDOM = document.createElement("p")
+                    nameDOM.id = nickname
+                    nameDOM.innerHTML = nickname
+                    nameDOM.classList.add("nickname")
+                    document.getElementById("team2").appendChild(nameDOM)
+                })
                 break
             }
             case "TEAMCHANGE": {
@@ -73,11 +88,11 @@ server.onopen = function(event) {
                             // })
                             document.getElementById(nickname).remove()
                         }
-                let name = document.createElement("p")
-                name.id = nickname
-                name.innerHTML = nickname
-                name.classList.add("nickname")
-                document.getElementById(team).appendChild(name)
+                let nameDOM = document.createElement("p")
+                nameDOM.id = nickname
+                nameDOM.innerHTML = nickname
+                nameDOM.classList.add("nickname")
+                document.getElementById(team).appendChild(nameDOM)
                 break
             }
         }
