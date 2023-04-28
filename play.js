@@ -76,6 +76,7 @@ server.onopen = function(event) {
                 let name = document.createElement("p")
                 name.id = nickname
                 name.innerHTML = nickname
+                name.classList.add("nickname")
                 document.getElementById(team).appendChild(name)
                 break
             }
