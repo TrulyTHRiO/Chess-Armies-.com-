@@ -53,7 +53,6 @@ document.getElementById("submitNickname").onclick = function() {
 }
 
 server.onopen = function(event) {
-    RequestGame()
     if (sendReq == true) {
         let request = {
             requestType: "ASSIGNCLIENT",
@@ -61,6 +60,7 @@ server.onopen = function(event) {
             gameCode: gameCode,
         }
         server.send(JSON.stringify(request))
+        RequestGame()
     }
     server.onmessage = function(data) {
         let parseData = JSON.parse(data.data)
@@ -85,6 +85,20 @@ server.onopen = function(event) {
                     nameDOM.classList.add("nickname")
                     document.getElementById("team2").appendChild(nameDOM)
                 })
+                if (team2.includes(playerNickname)) {
+                    let divs = document.querySelectorAll(".tile")
+                    if (team == "team1") {
+                        document.getElementById("board").classList.remove("rot")
+                        for (let i = 0; i < divs.length; ++i) {
+                            divs[i].classList.remove("rot")
+                        }
+                    } else {
+                        document.getElementById("board").classList.add("rot")
+                        for (let i = 0; i < divs.length; ++i) {
+                            divs[i].classList.add("rot")
+                        }
+                    }
+                }
                 break
             }
             case "TEAMCHANGE": {
