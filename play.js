@@ -105,8 +105,8 @@ server.onopen = function(event) {
                 nameDOM.classList.add("nickname")
                 document.getElementById(team).appendChild(nameDOM)
                 if (nickname == playerNickname) {
+                    let divs = document.querySelectorAll(".tile")
                     if (team == "team1") {
-                        let divs = document.querySelectorAll(".tile")
                         document.getElementById("board").classList.remove("rot")
                         for (let i = 0; i < divs.length; ++i) {
                             divs[i].classList.remove("rot")
