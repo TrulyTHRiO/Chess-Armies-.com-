@@ -82,7 +82,7 @@ html {
     background-color: coral;
 }
 
-#joinTeam1:hover,#joinTeam2:hover,#submitNickname:hover { /* does not work with .joinTeamButton:hover {} */
+#joinTeam1:hover,#joinTeam2:hover,#submitNickname:hover,#startGameButton:hover { /* does not work with .joinTeamButton:hover {} */
     background-color: blanchedalmond;
     color: black;
 }
@@ -117,6 +117,13 @@ html {
     background-color: green;
 }
 
+#startGameButton {
+    width: 18vw;
+    position: absolute;
+    left: 1vh;
+    background-color: dimgrey;
+}
+
 .nickname {
     color: black;
     font-family: Arial, Helvetica, sans-serif;
@@ -143,6 +150,14 @@ html {
 .selected {
     background-color: red;
     opacity: 40%;
+}
+
+.owned {
+
+}
+
+.unowned {
+    
 }
 
 .rot {

@@ -52,6 +52,40 @@ document.getElementById("submitNickname").onclick = function() {
     server.send(JSON.stringify(request))
 }
 
+document.getElementById("startGameButton").onclick = function() {
+    if (typeof playerNickname == "undefined") {
+        let request = {
+            requestType: "UPDATENICKNAME",
+            gameCode: gameCode,
+            nickname: "",
+        }
+        server.send(JSON.stringify(request))
+    }
+    let request = {
+        requestType: "STARTPIECEASSIGNMENT",
+        gameCode: gameCode,
+    }
+    server.send(JSON.stringify(request))
+}
+
+function StartPieceAssignment() {
+    if (typeof playerTeam != undefined) {
+        let tiles = document.querySelectorAll((playerTeam == "team1" ? ".white" : ".black"))
+        tiles.forEach(function(tile) {
+            let tileID = tile.id.split(",")
+            if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1] instanceof piece) {
+                tile.onclick = function() {
+                    let request = {
+                        requestType: "REQUESTPIECE",
+                        piece: tileID,
+                    }
+                    server.send(JSON.stringify(request))
+                }
+            }
+        })
+    }
+}
+
 server.onopen = function(event) {
     if (sendReq == true) {
         let request = {
@@ -85,11 +119,16 @@ server.onopen = function(event) {
                     nameDOM.classList.add("nickname")
                     document.getElementById("team2").appendChild(nameDOM)
                 })
-                if (team2.includes(playerNickname)) {
-                    let divs = document.querySelectorAll(".tile")
-                    document.getElementById("board").classList.add("rot")
-                    for (let i = 0; i < divs.length; ++i) {
-                        divs[i].classList.add("rot")
+                if (typeof playerNickname == "string") {
+                    if (team2.includes(playerNickname)) {
+                        playerTeam = "team2"
+                        let divs = document.querySelectorAll(".tile")
+                        document.getElementById("board").classList.add("rot")
+                        for (let i = 0; i < divs.length; ++i) {
+                            divs[i].classList.add("rot")
+                        }
+                    } else {
+                        playerTeam = "team1"
                     }
                 }
                 break
@@ -144,6 +183,25 @@ server.onopen = function(event) {
             case "INVALIDNICKNAME": {
                 document.getElementById("enterNickname").innerHTML = "INVALID NICKNAME"
                 break
+            }
+            case "ASSIGNHOST": {
+                document.getElementById("startGameButton").style = ""
+                document.getElementsByClassName("")
+                break
+            }
+            case "STARTPIECEASSIGNMENT": {
+                gameState = "assigning"
+                StartPieceAssignment()
+                break
+            }
+            case "STARTGAMEPLAY": {
+                gameState = "playing"
+                break
+            }
+            case "ASSIGNPIECE": {
+                if (parseData.nickname == playerNickname) {
+
+                }
             }
         }
     }
