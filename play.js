@@ -89,12 +89,14 @@ function StartPieceAssignment(retroactive) {
     if (retroactive) {
         document.querySelectorAll(".tile").forEach(function(tile) {
             let tileID = tile.id.split(",")
-            let owner = boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1].owner
-            if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1] instanceof piece && owner != undefined) {
-                if (owner == playerNickname) {
-                    document.getElementById(parseData.piece.toString()).classList.add("owned")
-                } else {
-                    document.getElementById(parseData.piece.toString()).classList.add("unowned")
+            if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1] instanceof piece) {
+                let owner = boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1].owner
+                if (owner != undefined) {
+                    if (owner == playerNickname) {
+                        document.getElementById(parseData.piece.toString()).classList.add("owned")
+                    } else {
+                        document.getElementById(parseData.piece.toString()).classList.add("unowned")
+                    }
                 }
             }
         })
@@ -122,16 +124,16 @@ server.onopen = function(event) {
                 let team1 = parseData.team1
                 team1.forEach(function(nickname){
                     let nameDOM = document.createElement("p")
-                    nameDOM.id = nickname
-                    nameDOM.innerHTML = nickname
+                    nameDOM.id = nickname.replaceAll("&", "&amp").replaceAll("<", "&lt").replaceAll(">", "&gt")
+                    nameDOM.innerHTML = nickname.replaceAll("&", "&amp").replaceAll("<", "&lt").replaceAll(">", "&gt")
                     nameDOM.classList.add("nickname")
                     document.getElementById("team1").appendChild(nameDOM)
                 })
                 let team2 = parseData.team2
                 team2.forEach(function(nickname){
                     let nameDOM = document.createElement("p")
-                    nameDOM.id = nickname
-                    nameDOM.innerHTML = nickname
+                    nameDOM.id = nickname.replaceAll("&", "&amp").replaceAll("<", "&lt").replaceAll(">", "&gt")
+                    nameDOM.innerHTML = nickname.replaceAll("&", "&amp").replaceAll("<", "&lt").replaceAll(">", "&gt")
                     nameDOM.classList.add("nickname")
                     document.getElementById("team2").appendChild(nameDOM)
                 })
