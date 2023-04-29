@@ -153,11 +153,13 @@ html {
 }
 
 .owned {
-
+    background-color: red;
+    opacity: 20%;
 }
 
 .unowned {
-    
+    background-color: green;
+    opacity: 20%;
 }
 
 .rot {

@@ -165,8 +165,8 @@ server.onopen = function(event) {
                             document.getElementById(nickname).remove()
                         }
                 let nameDOM = document.createElement("p")
-                nameDOM.id = nickname.replaceAll("&", "&amp").replace("<", "&lt").replace(">", "&gt")
-                nameDOM.innerHTML = nickname.replaceAll("&", "&amp").replace("<", "&lt").replace(">", "&gt")
+                nameDOM.id = nickname.replaceAll("&", "&amp").replaceAll("<", "&lt").replaceAll(">", "&gt")
+                nameDOM.innerHTML = nickname.replaceAll("&", "&amp").replaceAll("<", "&lt").replaceAll(">", "&gt")
                 nameDOM.classList.add("nickname")
                 document.getElementById(team).appendChild(nameDOM)
                 if (typeof playerNickname == "string" && nickname == playerNickname) {
@@ -187,14 +187,14 @@ server.onopen = function(event) {
             }
             case "NICKNAMESET": {
                 playerNickname = parseData.nickname
-                document.getElementById("code").innerHTML += " (" + playerNickname.replaceAll("&", "&amp").replace("<", "&lt").replace(">", "&gt") + ")"
+                document.getElementById("code").innerHTML += " (" + playerNickname.replaceAll("&", "&amp").replaceAll("<", "&lt").replaceAll(">", "&gt") + ")"
                 document.getElementById("nicknamePopup").style = "display: none"
                 document.getElementById("boardContainer").style = ""
                 break
             }
             case "PLAYERNICKNAME": {
                 playerNickname = parseData.nickname
-                document.getElementById("code").innerHTML += " (" + playerNickname.replaceAll("&", "&amp").replace("<", "&lt").replace(">", "&gt") + ")"
+                document.getElementById("code").innerHTML += " (" + playerNickname.replaceAll("&", "&amp").replaceAll("<", "&lt").replaceAll(">", "&gt") + ")"
                 document.getElementById("nicknamePopup").style = "display: none"
                 document.getElementById("boardContainer").style = ""
                 break
@@ -218,11 +218,14 @@ server.onopen = function(event) {
                 break
             }
             case "ASSIGNPIECE": {
-                if (parseData.nickname == playerNickname) {
-                    document.getElementById(parseData.piece.toString()).classList.add("owned")
+                let nickname = parseData.nickname
+                let piece = parseData.piece
+                if (nickname == playerNickname) {
+                    document.getElementById(piece.toString()).classList.add("owned")
                 } else {
-                    document.getElementById(parseData.piece.toString()).classList.add("unowned")
+                    document.getElementById(piece.toString()).classList.add("unowned")
                 }
+                boardArr[alphabet.indexOf(piece[0])][piece[1]-1].owner = nickname
             }
         }
     }
