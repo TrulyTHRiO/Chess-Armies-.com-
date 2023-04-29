@@ -1,5 +1,3 @@
-// UPDATING OTHER PIECES.JS
-
 class piece {
 
     constructor(tile, colour) {
@@ -256,4 +254,3 @@ class pawn extends piece {
     }
 
 }
-export {piece, rook, knight, bishop, queen, king, pawn}
