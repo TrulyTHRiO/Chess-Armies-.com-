@@ -78,6 +78,7 @@ function StartPieceAssignment(retroactive) {
                 tile.onclick = function() {
                     let request = {
                         requestType: "REQUESTPIECE",
+                        gameCode: gameCode,
                         piece: tileID,
                     }
                     server.send(JSON.stringify(request))
