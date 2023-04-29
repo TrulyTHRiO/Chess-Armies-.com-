@@ -68,18 +68,32 @@ document.getElementById("startGameButton").onclick = function() {
     server.send(JSON.stringify(request))
 }
 
-function StartPieceAssignment() {
-    if (typeof playerTeam != undefined) {
-        let tiles = document.querySelectorAll((playerTeam == "team1" ? ".white" : ".black"))
-        tiles.forEach(function(tile) {
+function StartPieceAssignment(retroactive) {
+    if (typeof playerTeam != "undefined") {
+        // let tiles = document.querySelectorAll(".tile")
+        let col = (playerTeam == "team1" ? "w" : "b")
+        document.querySelectorAll(".tile").forEach(function(tile) {
             let tileID = tile.id.split(",")
-            if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1] instanceof piece) {
+            if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1] instanceof piece && boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1].colour == col) {
                 tile.onclick = function() {
                     let request = {
                         requestType: "REQUESTPIECE",
                         piece: tileID,
                     }
                     server.send(JSON.stringify(request))
+                }
+            }
+        })
+    }
+    if (retroactive) {
+        document.querySelectorAll(".tile").forEach(function(tile) {
+            let tileID = tile.id.split(",")
+            let owner = boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1].owner
+            if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1] instanceof piece && owner != undefined) {
+                if (owner == playerNickname) {
+                    document.getElementById(parseData.piece.toString()).classList.add("owned")
+                } else {
+                    document.getElementById(parseData.piece.toString()).classList.add("unowned")
                 }
             }
         })
@@ -102,6 +116,7 @@ server.onopen = function(event) {
         switch (parseData.responseType) {
             case "GAMEOBJECT": {
                 boardArr = parseData.boardArr
+                gameState = parseData.gameState
                 CreateTiles("w")
                 let team1 = parseData.team1
                 team1.forEach(function(nickname){
@@ -119,17 +134,20 @@ server.onopen = function(event) {
                     nameDOM.classList.add("nickname")
                     document.getElementById("team2").appendChild(nameDOM)
                 })
-                if (typeof playerNickname == "string") {
-                    if (team2.includes(playerNickname)) {
-                        playerTeam = "team2"
-                        let divs = document.querySelectorAll(".tile")
-                        document.getElementById("board").classList.add("rot")
-                        for (let i = 0; i < divs.length; ++i) {
-                            divs[i].classList.add("rot")
-                        }
-                    } else {
-                        playerTeam = "team1"
+                if (typeof playerNickname == "string" && team2.includes(playerNickname)) {
+                    playerTeam = "team2"
+                    let divs = document.querySelectorAll(".tile")
+                    document.getElementById("board").classList.add("rot")
+                    for (let i = 0; i < divs.length; ++i) {
+                        divs[i].classList.add("rot")
                     }
+                } else {
+                    playerTeam = "team1"
+                }
+                if (gameState == "assigning") {
+                    StartPieceAssignment(true)
+                } else if (gameState == "playing") {
+
                 }
                 break
             }
@@ -150,7 +168,7 @@ server.onopen = function(event) {
                 nameDOM.innerHTML = nickname
                 nameDOM.classList.add("nickname")
                 document.getElementById(team).appendChild(nameDOM)
-                if (nickname == playerNickname) {
+                if (typeof playerNickname == "string" && nickname == playerNickname) {
                     let divs = document.querySelectorAll(".tile")
                     if (team == "team1") {
                         document.getElementById("board").classList.remove("rot")
@@ -191,7 +209,7 @@ server.onopen = function(event) {
             }
             case "STARTPIECEASSIGNMENT": {
                 gameState = "assigning"
-                StartPieceAssignment()
+                StartPieceAssignment(false)
                 break
             }
             case "STARTGAMEPLAY": {
@@ -200,7 +218,9 @@ server.onopen = function(event) {
             }
             case "ASSIGNPIECE": {
                 if (parseData.nickname == playerNickname) {
-
+                    document.getElementById(parseData.piece.toString()).classList.add("owned")
+                } else {
+                    document.getElementById(parseData.piece.toString()).classList.add("unowned")
                 }
             }
         }
