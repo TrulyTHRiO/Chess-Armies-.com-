@@ -3,10 +3,12 @@ class piece {
     constructor(tile, colour) {
         this.pos = tile
         this.colour = colour
+        this.turnMovable = true
+        this.owner = undefined
     }
 
-    turnMovable = true
-    owner = undefined
+    // turnMovable = true
+    // owner = undefined
 
 }
 
@@ -17,9 +19,9 @@ class rook extends piece {
         this.pos = tile
         this.colour = colour
         this.img = "pieces/"+(colour == "w" ? "white-rook.png" : "black-rook.png")
+        this.moved = false
     }
 
-    moved = false
 
     printShit() {
         console.log(this.pos)
@@ -138,9 +140,9 @@ class king extends piece {
         this.pos = tile
         this.colour = colour
         this.img = "pieces/"+(colour == "w" ? "white-king.png" : "black-king.jpg")
+        this.moved = false
     }
 
-    moved = false
 
     printShit() {
         console.log(this.pos)
@@ -221,9 +223,9 @@ class pawn extends piece {
         this.pos = tile
         this.colour = colour
         this.img = "pieces/"+(colour == "w" ? "white-pawn.png" : "black-pawn.png")
+        this.moved = false
     }
 
-    moved = false
 
     printShit() {
         console.log(this.pos)
