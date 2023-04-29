@@ -6,6 +6,7 @@ class piece {
     }
 
     turnMovable = true
+    owner = undefined
 
 }
 

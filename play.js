@@ -165,8 +165,8 @@ server.onopen = function(event) {
                             document.getElementById(nickname).remove()
                         }
                 let nameDOM = document.createElement("p")
-                nameDOM.id = nickname
-                nameDOM.innerHTML = nickname
+                nameDOM.id = nickname.replaceAll("&", "&amp").replace("<", "&lt").replace(">", "&gt")
+                nameDOM.innerHTML = nickname.replaceAll("&", "&amp").replace("<", "&lt").replace(">", "&gt")
                 nameDOM.classList.add("nickname")
                 document.getElementById(team).appendChild(nameDOM)
                 if (typeof playerNickname == "string" && nickname == playerNickname) {
@@ -187,14 +187,14 @@ server.onopen = function(event) {
             }
             case "NICKNAMESET": {
                 playerNickname = parseData.nickname
-                document.getElementById("code").innerHTML += " (" + playerNickname + ")"
+                document.getElementById("code").innerHTML += " (" + playerNickname.replaceAll("&", "&amp").replace("<", "&lt").replace(">", "&gt") + ")"
                 document.getElementById("nicknamePopup").style = "display: none"
                 document.getElementById("boardContainer").style = ""
                 break
             }
             case "PLAYERNICKNAME": {
                 playerNickname = parseData.nickname
-                document.getElementById("code").innerHTML += " (" + playerNickname + ")"
+                document.getElementById("code").innerHTML += " (" + playerNickname.replaceAll("&", "&amp").replace("<", "&lt").replace(">", "&gt") + ")"
                 document.getElementById("nicknamePopup").style = "display: none"
                 document.getElementById("boardContainer").style = ""
                 break
