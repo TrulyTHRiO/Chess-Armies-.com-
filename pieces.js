@@ -8,6 +8,15 @@ class piece {
     turnMovable = true
     owner = ""
 
+    SetTimer(time) {
+        this.turnMovable = false
+        setTimeout(this.SetTurnMovable, time, true)
+    }
+
+    SetTurnMovable(type) {
+        this.turnMovable = type
+    }
+    
 }
 
 class rook extends piece {
@@ -202,8 +211,9 @@ class king extends piece {
                     console.log("OROOOROOKK")
                     if ((boardArr[alphabet.indexOf(this.pos[0])+i*Math.sign(alphabet.indexOf(posTo[0])-alphabet.indexOf(this.pos[0]))][this.pos[1]-1].colour == this.colour) && ((boardArr[alphabet.indexOf(this.pos[0])+i*Math.sign(alphabet.indexOf(posTo[0])-alphabet.indexOf(this.pos[0]))][parseInt(this.pos[1]-1)].moved == false))) {
                         console.log("truesch")
-                        this.moved = true
-                        this.Castle(i, posTo)
+                        // MAKE CASTLING SECTION IN MOVE PIECE FUNCTION
+                        // this.moved = true
+                        // this.Castle(i, posTo)
                         return true
                     } else {
                         console.log("falsch")
