@@ -16,6 +16,7 @@ class piece {
 
     SetTurnMovable(piece) {
         piece.turnMovable = true
+        playerTeam == "team2" ? document.getElementById(piece.pos.toString()).classList.add("rot") : document.getElementById(piece.pos.toString()).classList.remove("rot")
     }
     
 }
