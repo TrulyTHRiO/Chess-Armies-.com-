@@ -153,12 +153,12 @@ html {
 }
 
 .owned {
-    background-color: red;
+    background-color: green;
     opacity: 20%;
 }
 
 .unowned {
-    background-color: green;
+    background-color: red;
     opacity: 20%;
 }
 
