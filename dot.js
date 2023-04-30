@@ -4,6 +4,7 @@ const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZαβγδε
 const boardColours = "wbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbw"
 const boardPieces = "rnbqkbnrpppppppp--------------------------------PPPPPPPPRNBQKBNR"
 currentTurn = "w"
+const pieceTimer = 3000
 // const boardPieces = "RNBQKBNRPPPPPPPP--------------------------------pppppppprnbqkbnr"
 const boardSize = Math.sqrt(boardColours.length)
 const tileMax = (document.documentElement.clientWidth > document.documentElement.clientHeight ? "vh" : "vw")
@@ -137,7 +138,8 @@ function MovePiece(piece, tile, castle) {
         piece.pos = tile
         UpdateImage(tile)
     }
-    piece.turnMovable = false
+    // piece.turnMovable = false
+    piece.SetTimer(pieceTimer)
     if (document.getElementById("board").classList.contains("rot")) {
         document.getElementById(piece.pos).classList.remove("rot")
     } else {
@@ -156,43 +158,46 @@ function UpdateImage(tile) {
 
 var divs = document.querySelectorAll(".tile")
 
-for (let i = 0; i < divs.length; ++i) { // not sure why I haven't used forEach here?
-    divs[i].onclick = function() {
-        var thisID = this.id.split(",")
-        ////// console.log(thisID)
-        ////// console.log(divs[i], '@@@@@@@@@@@@@@@@@@@@@@@@@@')
-        if (selectedTile != null) {
-            document.getElementById(selectedTile.pos).classList.remove("selected")
-            ////// console.log(selectedTile, "@@@@@@@@@@@@@@@@@@@@pooof")
-            if (selectedTile == boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]) {
-                selectedTile = null
-            } else if (selectedTile.ValidateMove(thisID)) {
-                if (selectedTile.turnMovable) {
-                    ////// console.log("console dot ,ol bsadf @@@@@@@@@@@@@@@@@@@@@")
-                    MovePiece(selectedTile, thisID)
-                }
-                ////// console.log(thisID)
-                selectedTile = null
-            } else if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]) {
-                ////// console.log(boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1])
-                if ((boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]).colour == currentTurn) {
-                    selectedTile = boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]
-                    this.classList.add("selected")
-                } else {
-                    selectedTile = null
-                }
-            } else {
-                selectedTile = null
+// for (let i = 0; i < divs.length; ++i) { // not sure why I haven't used forEach here?
+    divs[i].onclick = 
+    
+function() {
+    var thisID = this.id.split(",")
+    ////// console.log(thisID)
+    ////// console.log(divs[i], '@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    if (selectedTile != null) {
+        document.getElementById(selectedTile.pos).classList.remove("selected")
+        ////// console.log(selectedTile, "@@@@@@@@@@@@@@@@@@@@pooof")
+        if (selectedTile == boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]) {
+            selectedTile = null
+        } else if (selectedTile.ValidateMove(thisID)) {
+            if (selectedTile.turnMovable) {
+                ////// console.log("console dot ,ol bsadf @@@@@@@@@@@@@@@@@@@@@")
+                MovePiece(selectedTile, thisID)
             }
-        } else if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]){
+            ////// console.log(thisID)
+            selectedTile = null
+        } else if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]) {
             ////// console.log(boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1])
             if ((boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]).colour == currentTurn) {
                 selectedTile = boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]
                 this.classList.add("selected")
+            } else {
+                selectedTile = null
             }
+        } else {
+            selectedTile = null
+        }
+    } else if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]){
+        ////// console.log(boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1])
+        if ((boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]).colour == currentTurn) {
+            selectedTile = boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]
+            this.classList.add("selected")
         }
     }
 }
+
+// }
 
 // document.getElementById("turnChange").onclick = function() {
 //     if (document.getElementById("board").classList.contains("rot")) {
