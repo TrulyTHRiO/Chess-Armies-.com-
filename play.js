@@ -1,3 +1,5 @@
+import { parse } from "path"
+
 function GetCookies() {
     let cookies = document.cookie
     let splitCookies = cookies.split("; ")
@@ -105,7 +107,7 @@ function StartPieceAssignment(retroactive) {
     }
 }
 
-function StartGamePlay(retroactive) {
+function StartGamePlay(retroactive, timeOfObj) {
     if (typeof playerTeam != "undefined") {
         // assign all pieces onclick
         let divs = document.querySelectorAll(".tile")
@@ -118,6 +120,13 @@ function StartGamePlay(retroactive) {
         document.querySelectorAll(".tile").forEach(function(tile) {
             document.getElementById(tile.id).classList.remove("owned")
             document.getElementById(tile.id).classList.remove("unowned")
+        })
+        boardArr.forEach(function(dimension, i1) {
+            boardArr[i1].forEach(function(individual, i2) {
+                if (boardArr[i1][i2].turnMovable == false) {
+                    boardArr[i1][i2].SetTimer(timeOfObj - boardArr[i1][i2].lastMoved)
+                }
+            })
         })
     }
 }
@@ -176,7 +185,8 @@ server.onopen = function(event) {
                 if (gameState == "assigning") {
                     StartPieceAssignment(true)
                 } else if (gameState == "playing") {
-                    StartGamePlay(true)
+                    let timeOfObj = parseData.timeOfObj
+                    StartGamePlay(true, timeOfObj)
                 }
                 break
             }
