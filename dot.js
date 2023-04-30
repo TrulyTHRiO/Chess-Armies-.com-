@@ -26,9 +26,9 @@ selectedTile = null
 // }
 
 function CreateTiles(playerCol) {
-    if (playerCol == "b") {
-        document.getElementById("board").classList.add("rot")
-    }
+    // if (playerCol == "b") {
+    //     document.getElementById("board").classList.add("rot")
+    // }
     for (let i1 = 0; i1 < boardSize; i1++) {
         for (let i2 = 0; i2 < boardSize; i2++) {
             let col = boardColours[i1*boardSize+i2]
@@ -43,7 +43,7 @@ function CreateTiles(playerCol) {
             tile.setAttribute("style", "height: "+(100-10)/boardSize+tileMax+"; width: "+(100-10)/boardSize+tileMax)
             pos = [alphabet[i2],(boardSize-i1)]
             tile.setAttribute("id", pos)
-            boardArr[i2][boardSize-i1-1] = CreatePiece(boardPieces[i1*boardSize+i2], pos)
+            // // // // boardArr[i2][boardSize-i1-1] = CreatePiece(boardPieces[i1*boardSize+i2], pos)
             // boardArr[i2][i1] = CreatePiece(boardPieces[i1*boardSize+i2], pos)
             document.getElementById("board").appendChild(tile)
             if (boardArr[i2][boardSize-i1-1] != null) {
@@ -156,7 +156,7 @@ function UpdateImage(tile) {
 
 var divs = document.querySelectorAll(".tile")
 
-for (let i = 0; i < divs.length; ++i) {
+for (let i = 0; i < divs.length; ++i) { // not sure why I haven't used forEach here?
     divs[i].onclick = function() {
         var thisID = this.id.split(",")
         ////// console.log(thisID)
@@ -191,7 +191,7 @@ for (let i = 0; i < divs.length; ++i) {
                 this.classList.add("selected")
             }
         }
-  }
+    }
 }
 
 // document.getElementById("turnChange").onclick = function() {
