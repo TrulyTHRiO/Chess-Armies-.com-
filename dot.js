@@ -156,13 +156,11 @@ function UpdateImage(tile) {
 
 // CreateTiles("w")
 
-var divs = document.querySelectorAll(".tile")
-
 // for (let i = 0; i < divs.length; ++i) { // not sure why I haven't used forEach here?
-    divs[i].onclick = 
+    // divs[i].onclick = 
     
-function() {
-    var thisID = this.id.split(",")
+function DivsOnClickRequest() {
+    let thisID = this.id.split(",")
     ////// console.log(thisID)
     ////// console.log(divs[i], '@@@@@@@@@@@@@@@@@@@@@@@@@@')
     if (selectedTile != null) {
