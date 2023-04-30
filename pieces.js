@@ -15,8 +15,8 @@ class piece {
     }
 
     SetTurnMovable(piece) {
-        piece.turnMovable = true
-        playerTeam == "team2" ? document.getElementById(piece.pos.toString()).classList.add("rot") : document.getElementById(piece.pos.toString()).classList.remove("rot")
+        piece.turnMovable = true;
+        (typeof playerTeam != "undefined" && playerTeam == "team2") ? document.getElementById(piece.pos.toString()).children[0].classList.add("rot") : document.getElementById(piece.pos.toString()).children[0].classList.remove("rot")
     }
     
 }
