@@ -33,14 +33,16 @@ function RequestGame() {
 }
 
 document.getElementById("joinTeam1").onclick = document.getElementById("joinTeam2").onclick = function() {
-    console.log(this.id)
-    let request = {
-        requestType: "JOINTEAM",
-        gameCode: gameCode,
-        team: this.id,
+    if (gameState == "joining") {
+        console.log(this.id)
+        let request = {
+            requestType: "JOINTEAM",
+            gameCode: gameCode,
+            team: this.id,
+        }
+        // currentTurn = (this.id == "joinTeam1" ? "w" : "b")
+        server.send(JSON.stringify(request))
     }
-    currentTurn = (this.id == "joinTeam1" ? "w" : "b")
-    server.send(JSON.stringify(request))
 }
 
 document.getElementById("submitNickname").onclick = function() {
@@ -91,7 +93,7 @@ function StartPieceAssignment(retroactive) {
             let tileID = tile.id.split(",")
             if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1] != null) {
                 let owner = boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1].owner
-                if (owner != "") {
+                if (owner != "" && typeof playerNickname == "string") {
                     if (owner == playerNickname) {
                         document.getElementById(tile.id).classList.add("owned")
                     } else {
