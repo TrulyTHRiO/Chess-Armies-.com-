@@ -20,7 +20,7 @@ class rook extends piece {
     }
 
     moved = false
-    type = rook
+    type = "rook"
 
     printShit() {
         console.log(this.pos)
@@ -52,7 +52,7 @@ class knight extends piece {
         this.img = "pieces/"+(colour == "w" ? "white-knight.png" : "black-knight.png")
     }
     
-    type = knight
+    type = "knight"
 
     printShit() {
         console.log(this.pos)
@@ -78,7 +78,7 @@ class bishop extends piece {
         this.img = "pieces/"+(colour == "w" ? "white-bishop.png" : "black-bishop.png")
     }
     
-    type = bishop
+    type = "bishop"
 
     printShit() {
         console.log(this.pos)
@@ -109,7 +109,7 @@ class queen extends piece {
         this.img = "pieces/"+(colour == "w" ? "white-queen.png" : "black-queen.jpg")
     }
 
-    type = queen
+    type = "queen"
 
     printShit() {
         console.log(this.pos)
@@ -148,7 +148,7 @@ class king extends piece {
     }
 
     moved = false
-    type = king
+    type = "king"
 
     printShit() {
         console.log(this.pos)
@@ -232,7 +232,7 @@ class pawn extends piece {
     }
 
     moved = false
-    type = pawn
+    type = "pawn"
 
     printShit() {
         console.log(this.pos)
