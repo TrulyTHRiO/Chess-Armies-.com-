@@ -121,7 +121,7 @@ function StartGamePlay(retroactive, timeOfObj) {
         })
         boardArr.forEach(function(dimension, i1) {
             boardArr[i1].forEach(function(individual, i2) {
-                if (boardArr[i1][i2].turnMovable == false) {
+                if (individual != null && individual.turnMovable == false) {
                     boardArr[i1][i2].SetTimer(timeOfObj - boardArr[i1][i2].lastMoved)
                 }
             })
