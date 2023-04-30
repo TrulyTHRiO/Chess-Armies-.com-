@@ -93,8 +93,8 @@ function StartPieceAssignment(retroactive) {
             let tileID = tile.id.split(",")
             if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1] != null) {
                 let owner = boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1].owner
-                if (owner != "" && typeof playerNickname == "string") {
-                    if (owner == playerNickname) {
+                if (owner != "") {
+                    if (typeof playerNickname == "string" && owner == playerNickname) {
                         document.getElementById(tile.id).classList.add("owned")
                     } else {
                         document.getElementById(tile.id).classList.add("unowned")
