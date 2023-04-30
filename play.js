@@ -74,7 +74,7 @@ function StartPieceAssignment(retroactive) {
         let col = (playerTeam == "team1" ? "w" : "b")
         document.querySelectorAll(".tile").forEach(function(tile) {
             let tileID = tile.id.split(",")
-            if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1] instanceof piece && boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1].colour == col) {
+            if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1] != null && boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1].colour == col) {
                 tile.onclick = function() {
                     let request = {
                         requestType: "REQUESTPIECE",
@@ -89,9 +89,9 @@ function StartPieceAssignment(retroactive) {
     if (retroactive) {
         document.querySelectorAll(".tile").forEach(function(tile) {
             let tileID = tile.id.split(",")
-            if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1] instanceof piece) {
+            if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1] != null) {
                 let owner = boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1].owner
-                if (owner != undefined) {
+                if (owner != "") {
                     if (owner == playerNickname) {
                         document.getElementById(parseData.piece.toString()).classList.add("owned")
                     } else {
@@ -119,6 +119,13 @@ server.onopen = function(event) {
         switch (parseData.responseType) {
             case "GAMEOBJECT": {
                 boardArr = parseData.boardArr
+                boardArr.forEach(function(dimension, i1) {
+                    dimension.forEach(function(individual, i2) {
+                        if (boardArr[i1][i2] != null) {
+                            boardArr[i1][i2] = Object.assign(CreatePiece(individual.type), boardArr[i1][i2])
+                        }
+                    })
+                })
                 gameState = parseData.gameState
                 CreateTiles("w")
                 let team1 = parseData.team1
