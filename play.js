@@ -1,5 +1,3 @@
-import { parse } from "path"
-
 function GetCookies() {
     let cookies = document.cookie
     let splitCookies = cookies.split("; ")
