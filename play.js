@@ -55,14 +55,14 @@ document.getElementById("submitNickname").onclick = function() {
 }
 
 document.getElementById("startGameButton").onclick = function() {
-    if (typeof playerNickname == "undefined") {
-        let request = {
-            requestType: "UPDATENICKNAME",
-            gameCode: gameCode,
-            nickname: "",
-        }
-        server.send(JSON.stringify(request))
-    }
+    // if (typeof playerNickname == "undefined") {
+    //     let request = {
+    //         requestType: "UPDATENICKNAME",
+    //         gameCode: gameCode,
+    //         nickname: "",
+    //     }
+    //     server.send(JSON.stringify(request))
+    // }
     let request = {
         requestType: "STARTPIECEASSIGNMENT",
         gameCode: gameCode,
@@ -101,6 +101,23 @@ function StartPieceAssignment(retroactive) {
                     }
                 }
             }
+        })
+    }
+}
+
+function StartGamePlay(retroactive) {
+    if (typeof playerTeam != "undefined") {
+        // assign all pieces onclick
+        let divs = document.querySelectorAll(".tile")
+        divs.forEach(function(div) {
+            div.onclick = DivsOnClickRequest
+        })
+    
+    }
+    if (!retroactive) {
+        document.querySelectorAll(".tile").forEach(function(tile) {
+            document.getElementById(tile.id).classList.remove("owned")
+            document.getElementById(tile.id).classList.remove("unowned")
         })
     }
 }
@@ -159,7 +176,7 @@ server.onopen = function(event) {
                 if (gameState == "assigning") {
                     StartPieceAssignment(true)
                 } else if (gameState == "playing") {
-
+                    StartGamePlay(true)
                 }
                 break
             }
@@ -222,10 +239,20 @@ server.onopen = function(event) {
             case "STARTPIECEASSIGNMENT": {
                 gameState = "assigning"
                 StartPieceAssignment(false)
+                document.getElementById("startGameButton").innerHTML = "START 2.0!"
+                document.getElementById("startGameButton").onclick = function() {
+                    let request = {
+                        requestType: "STARTGAMEPLAY",
+                        gameCode: gameCode,
+                    }
+                    server.send(JSON.stringify(request))
+
+                }
                 break
             }
             case "STARTGAMEPLAY": {
                 gameState = "playing"
+                StartGamePlay(false)
                 break
             }
             case "ASSIGNPIECE": {
