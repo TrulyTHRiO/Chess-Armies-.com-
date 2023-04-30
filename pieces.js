@@ -11,11 +11,11 @@ class piece {
 
     SetTimer(time) {
         this.turnMovable = false
-        setTimeout(this.SetTurnMovable, time, true)
+        setTimeout(this.SetTurnMovable, time, this)
     }
 
-    SetTurnMovable(type) {
-        this.turnMovable = type
+    SetTurnMovable(piece) {
+        piece.turnMovable = true
     }
     
 }
