@@ -1,4 +1,4 @@
-// const server = new WebSocket("wss://home.chessarmies.com:5072");
+// const server = new WebSocket("wss://home.chessarmies.com:5072")
 
 const joinGame = document.getElementById("joinGame")
 const joinGameClick = document.getElementById("joinClickArea")
@@ -7,24 +7,24 @@ const createGame = document.getElementById("createGame")
 const codeBox = document.getElementById("codeBox")
 const codeCharSet = "ABCDEFGHJKLMNOPQRSTUVWXYZ1234567890"
 
-// function sendEnteredCode() {
+// function SendEnteredCode() {
 //     codeField.value = codeField.value.toUpperCase()
 //     codeField.value = codeField.value.replaceAll("O", "0")
 //     if (codeField.value.length == 8) {
 //         for (i = 0; i < 8; i++) {
 //             if (!codeCharSet.includes(codeField.value[i])) {
-//                 incorrectCode()
+//                 IncorrectCode()
 //                 return
 //             }
 //         }
 //         request = {
 //             requestType: "JOIN",
 //             gameCode: codeField.value,
-//             UUID: retrieveCookie("UUID"),
+//             UUID: RetrieveCookie("UUID"),
 //         }
 //         server.send(JSON.stringify(request))
 //     } else {
-//         incorrectCode() 
+//         IncorrectCode() 
 //     }
 // }
 
@@ -32,13 +32,13 @@ function JoinGameHandler() {
     console.log(this)
     var response = JSON.parse(this.responseText)
     if (response.responseType == "NOGAMEFOUND") {
-        incorrectCode()
+        IncorrectCode()
     } else {
-        window.location.href = "https://chessarmies.com/play.html"
+        window.location.href = "https://chessarmies.com/play/"
     }
 }
 
-function sendEnteredCode() {
+function SendEnteredCode() {
     codeField.value = codeField.value.toUpperCase()
     codeField.value = codeField.value.replaceAll("O", "0")
     var enterCodeReq = new XMLHttpRequest()
@@ -50,35 +50,35 @@ function sendEnteredCode() {
     if (codeField.value.length == 8) {
         for (i = 0; i < 8; i++) {
             if (!codeCharSet.includes(codeField.value[i])) {
-                incorrectCode()
+                IncorrectCode()
                 return
             }
         }
         request = {
             requestType: "JOIN",
             gameCode: codeField.value,
-            // UUID: retrieveCookie("UUID"),
+            // UUID: RetrieveCookie("UUID"),
         }
         // server.send(JSON.stringify(request))
         enterCodeReq.send(JSON.stringify(request))
     } else {
-        incorrectCode() 
+        IncorrectCode() 
     }
 }
 
 
-function retrieveCookie(type) {
-    let cookies = getCookies()
-    if (type == "UUID") {
-        let UUID = cookies.UUID
-        return UUID
-    } else if (type == "gameCode") {
-        let gameCode = cookies.gameCode
-        return gameCode
-    } else {
-        return gameCode, UUID
-    }
-}
+// function RetrieveCookie(type) {
+//     let cookies = getCookies()
+//     if (type == "UUID") {
+//         let UUID = cookies.UUID
+//         return UUID
+//     } else if (type == "gameCode") {
+//         let gameCode = cookies.gameCode
+//         return gameCode
+//     } else {
+//         return gameCode, UUID
+//     }
+// }
 
 // function requestSessionID() {
 //     request = {
@@ -87,7 +87,7 @@ function retrieveCookie(type) {
 //     server.send(JSON.stringify(request))
 // }
 
-function incorrectCode() {
+function IncorrectCode() {
     joinGame.classList.add("incorrectCode")
     setTimeout(function() {
         joinGame.classList.remove("incorrectCode")
@@ -95,7 +95,7 @@ function incorrectCode() {
     joinGameClick.onclick = function() {
         joinGameClick.onclick = null
         console.log(joinGameClick.onclick)
-        sendEnteredCode()
+        SendEnteredCode()
     }
     console.log(joinGameClick.onclick)
 }
@@ -110,7 +110,7 @@ joinGameClick.onclick = function() {
     joinGameClick.onclick = function() {
         joinGameClick.onclick = null
         console.log(joinGameClick.onclick)
-        sendEnteredCode()
+        SendEnteredCode()
     }
     console.log(codeField.value)
     joinGame.classList.add("enterButtonClicked")
@@ -142,7 +142,7 @@ codeField.onkeydown = function(keyboardEvent) {
 //                 break
 //             }
 //             case "NOGAMEFOUND": {
-//                 incorrectCode()
+//                 IncorrectCode()
 //                 break
 //             }
 //         }

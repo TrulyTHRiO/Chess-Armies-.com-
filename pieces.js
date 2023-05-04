@@ -217,8 +217,7 @@ class king extends piece {
                         // MAKE CASTLING SECTION IN MOVE PIECE FUNCTION
                         // this.moved = true
                         // this.Castle(i, posTo)
-                        console.log(i)
-                        return true
+                        return i
                     } else {
                         console.log("falsch")
                         return false

@@ -285,6 +285,14 @@ server.onopen = function(event) {
                     document.getElementById(piece.toString()).classList.add("unowned")
                 }
                 boardArr[alphabet.indexOf(piece[0])][piece[1]-1].owner = nickname
+                break
+            }
+            case "MOVEPIECE": {
+                let piece = boardArr[alphabet.indexOf(parseData.posFrom[0])][parseData.posFrom[1]-1]
+                let posTo = parseData.posTo
+                let rookDistance = parseData.rookDistance
+                MovePiece(piece, posTo, rookDistance)
+                break
             }
         }
     }

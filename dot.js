@@ -93,15 +93,17 @@ function CreatePiece(piece, tile) {
 function RequestMovePiece(piece, tile) {
     request = {
         requestType: "MOVEPIECE",
+        gameCode: gameCode,
         from: piece.pos,
         to: tile,
     }
 }
 
-function MovePiece(piece, tile, castle) {
+function MovePiece(piece, tile, rookDistance) {
     ////// console.log(Math.abs(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0])), "ban")
     document.getElementById(piece.pos).innerHTML = ""
     if ((piece instanceof king) ? (Math.abs(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0])) > 1) : false) {
+        piece.Castle(rookDistance, tile)
         // ////// console.log("nba")
         // if (Math.sign(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0])) == 1) {
         //     boardArr[0][piece.pos[1]-1].turnMovable = false
@@ -168,10 +170,10 @@ function DivsOnClickRequest() {
         ////// console.log(selectedTile, "@@@@@@@@@@@@@@@@@@@@pooof")
         if (selectedTile == boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]) {
             selectedTile = null
-        } else if (selectedTile.ValidateMove(thisID)) {
+        } else if (selectedTile.ValidateMove(thisID) > 0) {
             if (selectedTile.turnMovable) {
                 ////// console.log("console dot ,ol bsadf @@@@@@@@@@@@@@@@@@@@@")
-                MovePiece(selectedTile, thisID)
+                RequestMovePiece(selectedTile, thisID)
             }
             ////// console.log(thisID)
             selectedTile = null
