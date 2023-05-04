@@ -288,8 +288,8 @@ server.onopen = function(event) {
                 break
             }
             case "MOVEPIECE": {
-                let piece = boardArr[alphabet.indexOf(parseData.posFrom[0])][parseData.posFrom[1]-1]
-                let posTo = parseData.posTo
+                let piece = boardArr[alphabet.indexOf(parseData.from[0])][parseData.from[1]-1]
+                let posTo = parseData.to
                 let rookDistance = parseData.rookDistance
                 MovePiece(piece, posTo, rookDistance)
                 break
