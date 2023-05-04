@@ -11,6 +11,7 @@ class piece {
 
     SetTimer(time) {
         this.turnMovable = false
+        this.lastMoved = Date.now
         setTimeout(this.SetTurnMovable, time, this)
     }
 
@@ -216,6 +217,7 @@ class king extends piece {
                         // MAKE CASTLING SECTION IN MOVE PIECE FUNCTION
                         // this.moved = true
                         // this.Castle(i, posTo)
+                        console.log(i)
                         return true
                     } else {
                         console.log("falsch")

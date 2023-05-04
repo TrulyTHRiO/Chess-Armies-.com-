@@ -120,9 +120,9 @@ function StartGamePlay(retroactive, timeOfObj) {
             document.getElementById(tile.id).classList.remove("unowned")
         })
         boardArr.forEach(function(dimension, i1) {
-            boardArr[i1].forEach(function(individual, i2) {
+            dimension.forEach(function(individual, i2) {
                 if (individual != null && individual.turnMovable == false) {
-                    boardArr[i1][i2].SetTimer(timeOfObj - boardArr[i1][i2].lastMoved)
+                    boardArr[i1][i2].SetTimer(timeOfObj - individual.lastMoved)
                 }
             })
         })
@@ -181,9 +181,20 @@ server.onopen = function(event) {
                     playerTeam = "team1"
                 }
                 if (gameState == "assigning") {
+                    document.getElementById("startGameButton").innerHTML = "START 2.0!"
+                    document.getElementById("startGameButton").onclick = function() {
+                        let request = {
+                            requestType: "STARTGAMEPLAY",
+                            gameCode: gameCode,
+                        }
+                        server.send(JSON.stringify(request))
+    
+                    }
                     StartPieceAssignment(true)
                 } else if (gameState == "playing") {
                     let timeOfObj = parseData.timeOfObj
+                    document.getElementById("startGameButton").style = "display: none"
+                    document.getElementById("startGameButton").onclick = null
                     StartGamePlay(true, timeOfObj)
                 }
                 break
@@ -261,6 +272,8 @@ server.onopen = function(event) {
             case "STARTGAMEPLAY": {
                 gameState = "playing"
                 StartGamePlay(false)
+                document.getElementById("startGameButton").style = "display: none"
+                document.getElementById("startGameButton").onclick = null
                 break
             }
             case "ASSIGNPIECE": {
