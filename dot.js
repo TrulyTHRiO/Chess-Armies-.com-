@@ -91,12 +91,13 @@ function CreatePiece(piece, tile) {
 }
 
 function RequestMovePiece(piece, tile) {
-    request = {
+    let request = {
         requestType: "MOVEPIECE",
         gameCode: gameCode,
         from: piece.pos,
         to: tile,
     }
+    server.send(JSON.stringify(request))
 }
 
 function MovePiece(piece, tile, rookDistance) {
