@@ -11,14 +11,14 @@ class piece {
 
     SetTimer(time) {
         this.turnMovable = false;
-        (typeof playerTeam != "undefined" && playerTeam == "team2") ? document.getElementById(this.pos).children[0].classList.remove("rot") : document.getElementById(this.pos).children[0].classList.add("rot")
+        document.getElementById(this.pos).children[0].classList.add("rot")
         // this.lastMoved = Date.now
         setTimeout(this.SetTurnMovable, time, this)
     }
 
     SetTurnMovable(piece) {
         piece.turnMovable = true;
-        (typeof playerTeam != "undefined" && playerTeam == "team2") ? document.getElementById(piece.pos).children[0].classList.add("rot") : document.getElementById(piece.pos).children[0].classList.remove("rot")
+        document.getElementById(piece.pos).children[0].classList.remove("rot")
     }
     
 }
