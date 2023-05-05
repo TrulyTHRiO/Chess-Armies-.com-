@@ -76,7 +76,7 @@ function StartPieceAssignment(retroactive) {
         let col = (playerTeam == "team1" ? "w" : "b")
         document.querySelectorAll(".tile").forEach(function(tile) {
             let tileID = tile.id.split(",")
-            if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1] != null && boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1].colour == col) {
+            if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1] && boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1].colour == col) {
                 tile.onclick = function() {
                     let request = {
                         requestType: "REQUESTPIECE",
@@ -91,7 +91,7 @@ function StartPieceAssignment(retroactive) {
     if (retroactive) {
         document.querySelectorAll(".tile").forEach(function(tile) {
             let tileID = tile.id.split(",")
-            if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1] != null) {
+            if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1]) {
                 let owner = boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1].owner
                 if (owner != "") {
                     if (typeof playerNickname == "string" && owner == playerNickname) {
@@ -111,7 +111,7 @@ function StartGamePlay(retroactive, timeOfObj) {
         let divs = document.querySelectorAll(".tile")
         divs.forEach(function(div) {
             let thisID = div.id.split(",")
-            if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1].owner == playerNickname)
+            if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1] && boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1].owner == playerNickname)
             div.onclick = DivsOnClickRequest
         })
     
@@ -124,7 +124,7 @@ function StartGamePlay(retroactive, timeOfObj) {
     } else {
         boardArr.forEach(function(dimension, i1) {
             dimension.forEach(function(individual, i2) {
-                if (individual != null && individual.turnMovable == false) {
+                if (individual && individual.turnMovable == false) {
                     if (pieceTimer - (timeOfObj - individual.lastMoved) > 0) {
                         boardArr[i1][i2].SetTimer(pieceTimer - (timeOfObj - individual.lastMoved))
                     }
@@ -152,7 +152,7 @@ server.onopen = function(event) {
                 boardArr = parseData.boardArr
                 boardArr.forEach(function(dimension, i1) {
                     dimension.forEach(function(individual, i2) {
-                        if (boardArr[i1][i2] != null) {
+                        if (boardArr[i1][i2]) {
                             boardArr[i1][i2] = Object.assign(CreatePiece(individual.type), boardArr[i1][i2])
                         }
                     })
