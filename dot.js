@@ -3,7 +3,7 @@ const server = new WebSocket("wss://home.chessarmies.com:5072"); // 82.20.58.71
 const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZαβγδεζηθικλμνξοπρστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ"
 const boardColours = "wbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbw"
 const boardPieces = "rnbqkbnrpppppppp--------------------------------PPPPPPPPRNBQKBNR"
-currentTurn = "w"
+// currentTurn = "w"
 const pieceTimer = 3000
 // const boardPieces = "RNBQKBNRPPPPPPPP--------------------------------pppppppprnbqkbnr"
 const boardSize = Math.sqrt(boardColours.length)
@@ -178,9 +178,9 @@ function DivsOnClickRequest() {
             }
             ////// console.log(thisID)
             selectedTile = null
-        } else if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]) {
+        } else if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1] && boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1].owner == playerNickname) {
             ////// console.log(boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1])
-            if ((boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]).colour == currentTurn) {
+            if ((boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]).colour == (playerTeam == "team1" ? "w" : "b")) {
                 selectedTile = boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]
                 this.classList.add("selected")
             } else {
@@ -191,7 +191,7 @@ function DivsOnClickRequest() {
         }
     } else if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]){
         ////// console.log(boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1])
-        if ((boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]).colour == currentTurn) {
+        if ((boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]).colour == (playerTeam == "team1" ? "w" : "b")) {
             selectedTile = boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]
             this.classList.add("selected")
         }
