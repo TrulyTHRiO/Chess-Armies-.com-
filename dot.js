@@ -140,9 +140,9 @@ function MovePiece(piece, tile, rookDistance) {
         boardArr[alphabet.indexOf(piece.pos[0])][piece.pos[1]-1] = null
         piece.pos = tile
         UpdateImage(tile)
+        piece.SetTimer(pieceTimer)
     }
     // piece.turnMovable = false
-    piece.SetTimer(pieceTimer)
     // if (document.getElementById("board").classList.contains("rot")) {
     //     document.getElementById(piece.pos).classList.remove("rot")
     // } else {
