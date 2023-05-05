@@ -189,7 +189,7 @@ function DivsOnClickRequest() {
         } else {
             selectedTile = null
         }
-    } else if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]){
+    } else if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1] && boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1].owner == playerNickname){
         ////// console.log(boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1])
         if ((boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]).colour == (playerTeam == "team1" ? "w" : "b")) {
             selectedTile = boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1]
