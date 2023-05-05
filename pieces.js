@@ -8,16 +8,18 @@ class piece {
     turnMovable = true
     lastMoved = undefined
     owner = ""
+    moved = false
 
     SetTimer(time) {
-        this.turnMovable = false;
+        this.moved = true
+        this.turnMovable = false
         document.getElementById(this.pos).children[0].classList.add("rot")
         // this.lastMoved = Date.now
         setTimeout(this.SetTurnMovable, time, this)
     }
 
     SetTurnMovable(piece) {
-        piece.turnMovable = true;
+        piece.turnMovable = true
         document.getElementById(piece.pos).children[0].classList.remove("rot")
     }
     
@@ -260,15 +262,13 @@ class pawn extends piece {
                 return true
             } else if ((!this.moved) && (boardArr[alphabet.indexOf(this.pos[0])][parseInt(this.pos[1])+(this.colour == "w" ? 0 : -2)] == null) && (parseInt(this.pos[1])+(this.colour == "w" ? 2 : -2) == posTo[1]) && (this.pos[0] == posTo[0])) {
                 console.log("aloha")
-                this.moved = true
                 return true
             } else {
                 console.log((parseInt(this.pos[1])+(this.colour == "w" ? 2 : -2)), posTo[1])
                 console.log(parseInt(this.pos[1])+(this.colour == "w" ? 1 : -1))
                 return false
             }
-        } else if ((boardArr[alphabet.indexOf(posTo[0])][posTo[1]-1].colour != this.colour) && ((parseInt(this.pos[1])+(this.colour == "w" ? 1 : -1) == posTo[1])) && (Math.abs(alphabet.indexOf(this.pos[0])-alphabet.indexOf(posTo[0])))) {
-            this.moved = true
+        } else if ((boardArr[alphabet.indexOf(posTo[0])][posTo[1]-1].colour != this.colour) && ((parseInt(this.pos[1])+(this.colour == "w" ? 1 : -1) == posTo[1])) && (Math.abs(alphabet.indexOf(this.pos[0])-alphabet.indexOf(posTo[0])) == 1)) {
             return true
         } else {
             return false
