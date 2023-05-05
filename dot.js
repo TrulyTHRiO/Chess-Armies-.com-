@@ -26,7 +26,7 @@ selectedTile = null
 
 // }
 
-function CreateTiles(playerCol) {
+function CreateTiles() {
     // if (playerCol == "b") {
     //     document.getElementById("board").classList.add("rot")
     // }
@@ -143,12 +143,12 @@ function MovePiece(piece, tile, rookDistance) {
     }
     // piece.turnMovable = false
     piece.SetTimer(pieceTimer)
-    if (document.getElementById("board").classList.contains("rot")) {
-        document.getElementById(piece.pos).classList.remove("rot")
-    } else {
-        console.log(piece.pos, document.getElementById(piece.pos).innerHTML)
-        document.getElementById(piece.pos).children[0].classList.add("rot")
-    }
+    // if (document.getElementById("board").classList.contains("rot")) {
+    //     document.getElementById(piece.pos).classList.remove("rot")
+    // } else {
+    //     console.log(piece.pos, document.getElementById(piece.pos).innerHTML)
+    //     document.getElementById(piece.pos).children[0].classList.add("rot")
+    // }
 }
 
 function UpdateImage(tile) {
