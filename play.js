@@ -123,7 +123,7 @@ function StartGamePlay(retroactive, timeOfObj) {
             dimension.forEach(function(individual, i2) {
                 if (individual != null && individual.turnMovable == false) {
                     if (pieceTimer - (timeOfObj - individual.lastMoved) > 0) {
-                        boardArr[i1][i2].SetTimer(pieceTimer - (timeOfObj - individual.lastMoved) > 0)
+                        boardArr[i1][i2].SetTimer(pieceTimer - (timeOfObj - individual.lastMoved))
                     }
                 }
             })
