@@ -10,7 +10,7 @@ class piece {
     owner = ""
 
     SetTimer(time) {
-        this.turnMovable = false
+        this.turnMovable = false;
         (typeof playerTeam != "undefined" && playerTeam == "team2") ? document.getElementById(piece.pos.toString()).children[0].classList.remove("rot") : document.getElementById(piece.pos.toString()).children[0].classList.add("rot")
         // this.lastMoved = Date.now
         setTimeout(this.SetTurnMovable, time, this)
