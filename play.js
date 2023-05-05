@@ -110,6 +110,8 @@ function StartGamePlay(retroactive, timeOfObj) {
         // assign all pieces onclick
         let divs = document.querySelectorAll(".tile")
         divs.forEach(function(div) {
+            let thisID = div.id.split(";")
+            if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1].owner == playerNickname)
             div.onclick = DivsOnClickRequest
         })
     
