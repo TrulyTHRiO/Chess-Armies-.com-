@@ -119,6 +119,7 @@ function StartGamePlay(retroactive, timeOfObj) {
             document.getElementById(tile.id).classList.remove("owned")
             document.getElementById(tile.id).classList.remove("unowned")
         })
+    } else {
         boardArr.forEach(function(dimension, i1) {
             dimension.forEach(function(individual, i2) {
                 if (individual != null && individual.turnMovable == false) {
