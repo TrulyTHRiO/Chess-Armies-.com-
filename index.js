@@ -34,7 +34,7 @@ function JoinGameHandler() {
     if (response.responseType == "NOGAMEFOUND") {
         IncorrectCode()
     } else {
-        window.location.href = "https://chessarmies.com/play/"
+        window.location.href = "https://chessarmies.com/play.html"
     }
 }
 
