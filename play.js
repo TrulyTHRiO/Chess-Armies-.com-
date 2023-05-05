@@ -110,8 +110,8 @@ function StartGamePlay(retroactive, timeOfObj) {
         // assign all pieces onclick
         let divs = document.querySelectorAll(".tile")
         divs.forEach(function(div) {
-            let thisID = div.id.split(",")
-            if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1] && boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1].owner == playerNickname)
+            // let thisID = div.id.split(",")
+            // if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1] && boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1].owner == playerNickname)
             div.onclick = DivsOnClickRequest
         })
     
@@ -233,6 +233,7 @@ server.onopen = function(event) {
                         for (let i = 0; i < divs.length; ++i) {
                             divs[i].classList.add("rot")
                         }
+                        playerTeam = "team2"
                     }
                 }
                 break
