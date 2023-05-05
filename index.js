@@ -34,7 +34,7 @@ function JoinGameHandler() {
     if (response.responseType == "NOGAMEFOUND") {
         IncorrectCode()
     } else {
-        window.location.href = "https://chessarmies.com/play.html"
+        window.location.href = "https://chessarmies.com/play/"
     }
 }
 
@@ -45,8 +45,8 @@ function SendEnteredCode() {
     enterCodeReq.open("POST", "https://home.chessarmies.com:5072")
     enterCodeReq.withCredentials = true
     enterCodeReq.addEventListener("load", JoinGameHandler)
-    enterCodeReq.addEventListener("abort", incorrectCode)
-    enterCodeReq.addEventListener("error", incorrectCode)
+    enterCodeReq.addEventListener("abort", IncorrectCode)
+    enterCodeReq.addEventListener("error", IncorrectCode)
     if (codeField.value.length == 8) {
         for (i = 0; i < 8; i++) {
             if (!codeCharSet.includes(codeField.value[i])) {
