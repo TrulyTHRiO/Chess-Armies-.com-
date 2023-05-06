@@ -54,6 +54,9 @@ document.getElementById("submitNickname").onclick = function() {
     server.send(JSON.stringify(request))
 }
 
+document.getElementById("nicknameField").onkeydown = document.getElementById("submitNickname").onclick
+
+
 document.getElementById("startGameButton").onclick = function() {
     // if (typeof playerNickname == "undefined") {
     //     let request = {
@@ -298,6 +301,13 @@ server.onopen = function(event) {
                 let posTo = parseData.to
                 let rookDistance = parseData.rookDistance
                 MovePiece(piece, posTo, rookDistance)
+                break
+            }
+            case "GAMEOVER": {
+                gameState = "over"
+                let piece = boardArr[alphabet.indexOf(parseData.from[0])][parseData.from[1]-1]
+                let posTo = parseData.to
+                MovePiece(piece, posTo, undefined)
                 break
             }
         }

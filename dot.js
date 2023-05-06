@@ -101,9 +101,10 @@ function RequestMovePiece(piece, tile) {
 }
 
 function MovePiece(piece, tile, rookDistance) {
-    if (piece instanceof pawn && (tile[1] == 0 || tile[1] == boardSize)) {
+    if (piece instanceof pawn && (tile[1] == 1 || tile[1] == boardSize)) {
         boardArr[alphabet.indexOf(piece.pos[0])][piece.pos[1]-1].ValidateMove = (new queen).ValidateMove
         boardArr[alphabet.indexOf(piece.pos[0])][piece.pos[1]-1].img = (new queen(undefined, "w")).img
+        boardArr[alphabet.indexOf(piece.pos[0])][piece.pos[1]-1] = Object.assign(new queen, boardArr[alphabet.indexOf(piece.pos[0])][piece.pos[1]-1])
     }
     ////// console.log(Math.abs(alphabet.indexOf(piece.pos[0])-alphabet.indexOf(tile[0])), "ban")
     document.getElementById(piece.pos).innerHTML = ""
