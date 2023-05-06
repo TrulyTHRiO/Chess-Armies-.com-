@@ -54,8 +54,12 @@ document.getElementById("submitNickname").onclick = function() {
     server.send(JSON.stringify(request))
 }
 
-document.getElementById("nicknameField").onkeydown = document.getElementById("submitNickname").onclick
-
+document.getElementById("nicknameField").onkeydown = function(keyboardEvent) {
+    console.log(keyboardEvent)
+    if (keyboardEvent.key == "Enter") {
+        document.getElementById("submitNickname").onclick()
+    }
+}
 
 document.getElementById("startGameButton").onclick = function() {
     // if (typeof playerNickname == "undefined") {
