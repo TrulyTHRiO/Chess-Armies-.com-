@@ -175,27 +175,28 @@ class king extends piece {
         document.getElementById(alphabet[alphabet.indexOf(this.pos[0])+rookDistance*Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))]+","+this.pos[1]).innerHTML = ""
         boardArr[alphabet.indexOf(this.pos[0])+Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))][this.pos[1]-1] = boardArr[alphabet.indexOf(this.pos[0])+rookDistance*Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))][this.pos[1]-1]
         boardArr[alphabet.indexOf(this.pos[0])+rookDistance*Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))][this.pos[1]-1].pos = (alphabet[alphabet.indexOf(this.pos[0])+Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))]+","+this.pos[1]).split(",")
-        boardArr[alphabet.indexOf(this.pos[0])+rookDistance*Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))][this.pos[1]-1].SetTimer(pieceTimer)
+        // boardArr[alphabet.indexOf(this.pos[0])+rookDistance*Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))][this.pos[1]-1].SetTimer(pieceTimer)
         boardArr[alphabet.indexOf(this.pos[0])+rookDistance*Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))][this.pos[1]-1].moved = true
         boardArr[alphabet.indexOf(this.pos[0])+rookDistance*Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))][this.pos[1]-1] = null
         boardArr[alphabet.indexOf(this.pos[0])+2*Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))][this.pos[1]-1] = this
         boardArr[alphabet.indexOf(this.pos[0])][this.pos[1]-1] = null
         console.log(alphabet[alphabet.indexOf(this.pos[0])+Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))]+this.pos[1],"asdcvsvzxxxxxxxx")
         UpdateImage((alphabet[alphabet.indexOf(this.pos[0])+Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))]+","+this.pos[1]).split(","))
-        if (document.getElementById("board").classList.contains("rot")) {
-            document.getElementById(alphabet[alphabet.indexOf(this.pos[0])+Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))]+","+this.pos[1]).classList.remove("rot")
-        } else {
-            document.getElementById(alphabet[alphabet.indexOf(this.pos[0])+Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))]+","+this.pos[1]).children[0].classList.add("rot")
-        }
+        // if (document.getElementById("board").classList.contains("rot")) {
+        //     document.getElementById(alphabet[alphabet.indexOf(this.pos[0])+Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))]+","+this.pos[1]).classList.remove("rot")
+        // } else {
+        //     document.getElementById(alphabet[alphabet.indexOf(this.pos[0])+Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))]+","+this.pos[1]).children[0].classList.add("rot")
+        // }
         this.pos = (alphabet[alphabet.indexOf(this.pos[0])+2*Math.sign(alphabet.indexOf(castleDir[0])-alphabet.indexOf(this.pos[0]))] + "," + this.pos[1]).split(",")
-        this.turnMovable = false
-        this.moved = true
+        // this.turnMovable = false
+        // this.moved = true
         UpdateImage(this.pos)
-        if (document.getElementById("board").classList.contains("rot")) {
-            document.getElementById(this.pos).classList.remove("rot")
-        } else {
-            document.getElementById(this.pos).children[0].classList.add("rot")
-        }
+        // if (document.getElementById("board").classList.contains("rot")) {
+        //     document.getElementById(this.pos).classList.remove("rot")
+        // } else {
+        //     document.getElementById(this.pos).children[0].classList.add("rot")
+        // }
+        this.SetTimer(pieceTimer)
         // UpdateImage()
         console.log(this)
     }
