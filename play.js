@@ -235,6 +235,7 @@ server.onopen = function(event) {
                         for (let i = 0; i < divs.length; ++i) {
                             divs[i].classList.remove("rot")
                         }
+                        playerTeam = "team1"
                     } else {
                         document.getElementById("board").classList.add("rot")
                         for (let i = 0; i < divs.length; ++i) {
