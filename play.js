@@ -208,6 +208,9 @@ server.onopen = function(event) {
                     document.getElementById("startGameButton").style = "display: none"
                     document.getElementById("startGameButton").onclick = null
                     StartGamePlay(true, timeOfObj)
+                } else if (gameState == "over") {
+                    document.getElementById("startGameButton").style = "display: none"
+                    document.getElementById("startGameButton").onclick = null
                 }
                 break
             }
