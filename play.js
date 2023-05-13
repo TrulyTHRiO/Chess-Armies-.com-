@@ -216,13 +216,8 @@ server.onopen = function(event) {
                 let team = (parseData.team == "joinTeam1" ? "team1" : "team2")
                 let oldTeam = parseData.oldTeam
                 if (oldTeam != undefined) {
-                    // Array.from(document.getElementById(team).children).forEach(function(element, i) {
-                        //     if (element.innerHTML == nickname) {
-                            //         document.getElementById(team).removeChild(document.getElementById(team.children[i]))
-                            //     }
-                            // })
-                            document.getElementById(nickname).remove()
-                        }
+                    document.getElementById(nickname.replaceAll("&", "&amp").replaceAll("<", "&lt").replaceAll(">", "&gt")).remove()
+                }
                 let nameDOM = document.createElement("p")
                 nameDOM.id = nickname.replaceAll("&", "&amp").replaceAll("<", "&lt").replaceAll(">", "&gt")
                 nameDOM.innerHTML = nickname.replaceAll("&", "&amp").replaceAll("<", "&lt").replaceAll(">", "&gt")
