@@ -1,13 +1,11 @@
-function GetCookies() {
+function GetCookies() { // gets stored cookies
     let cookies = document.cookie
     let splitCookies = cookies.split("; ")
     var parseCookies = {}
     splitCookies.forEach(function(element) {
-        console.log(element)
         element = (element.replace("=", ";")).split(";") // split on only the first "="
         parseCookies[element[0]] = element[1]
     })
-    console.log(parseCookies)
     return parseCookies
 }
 
@@ -17,7 +15,7 @@ function GetCookies() {
     var UUID = cookies.UUID
     var gameCode = cookies.gameCode
     if (UUID == undefined || gameCode == undefined) {
-        // window.location.href = "https://chessarmies.com/"
+        window.location.href = "https://chessarmies.com/"
     } else {
         document.getElementById("code").innerHTML = gameCode
         var sendReq = true
@@ -34,13 +32,11 @@ function RequestGame() {
 
 document.getElementById("joinTeam1").onclick = document.getElementById("joinTeam2").onclick = function() {
     if (gameState == "joining") {
-        console.log(this.id)
         let request = {
             requestType: "JOINTEAM",
             gameCode: gameCode,
             team: this.id,
         }
-        // currentTurn = (this.id == "joinTeam1" ? "w" : "b")
         server.send(JSON.stringify(request))
     }
 }
@@ -55,21 +51,12 @@ document.getElementById("submitNickname").onclick = function() {
 }
 
 document.getElementById("nicknameField").onkeydown = function(keyboardEvent) {
-    console.log(keyboardEvent)
     if (keyboardEvent.key == "Enter") {
         document.getElementById("submitNickname").onclick()
     }
 }
 
 document.getElementById("startGameButton").onclick = function() {
-    // if (typeof playerNickname == "undefined") {
-    //     let request = {
-    //         requestType: "UPDATENICKNAME",
-    //         gameCode: gameCode,
-    //         nickname: "",
-    //     }
-    //     server.send(JSON.stringify(request))
-    // }
     let request = {
         requestType: "STARTPIECEASSIGNMENT",
         gameCode: gameCode,
@@ -77,9 +64,8 @@ document.getElementById("startGameButton").onclick = function() {
     server.send(JSON.stringify(request))
 }
 
-function StartPieceAssignment(retroactive) {
+function StartPieceAssignment(retroactive) { // allows the pieces to be clicked to request their ownership
     if (typeof playerTeam != "undefined") {
-        // let tiles = document.querySelectorAll(".tile")
         let col = (playerTeam == "team1" ? "w" : "b")
         document.querySelectorAll(".tile").forEach(function(tile) {
             let tileID = tile.id.split(",")
@@ -95,7 +81,7 @@ function StartPieceAssignment(retroactive) {
             }
         })
     }
-    if (retroactive) {
+    if (retroactive) { // colours the pieces retroactively if the page is loaded part-way through the piece assignment
         document.querySelectorAll(".tile").forEach(function(tile) {
             let tileID = tile.id.split(",")
             if (boardArr[alphabet.indexOf(tileID[0])][tileID[1]-1]) {
@@ -112,18 +98,15 @@ function StartPieceAssignment(retroactive) {
     }
 }
 
-function StartGamePlay(retroactive, timeOfObj) {
+function StartGamePlay(retroactive, timeOfObj) { // allows the pieces to be moved
     if (typeof playerTeam != "undefined") {
-        // assign all pieces onclick
         let divs = document.querySelectorAll(".tile")
         divs.forEach(function(div) {
-            // let thisID = div.id.split(",")
-            // if (boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1] && boardArr[alphabet.indexOf(thisID[0])][thisID[1]-1].owner == playerNickname)
             div.onclick = DivsOnClickRequest
         })
     
     }
-    if (!retroactive) {
+    if (!retroactive) { // removes the colours added to the pieces during the assignment stage
         document.querySelectorAll(".tile").forEach(function(tile) {
             document.getElementById(tile.id).classList.remove("owned")
             document.getElementById(tile.id).classList.remove("unowned")
@@ -141,7 +124,7 @@ function StartGamePlay(retroactive, timeOfObj) {
     }
 }
 
-server.onopen = function(event) {
+server.onopen = function(event) { // on connecting to the server, sets up the event listener to handle any received data 
     if (sendReq == true) {
         let request = {
             requestType: "ASSIGNCLIENT",
@@ -151,9 +134,8 @@ server.onopen = function(event) {
         server.send(JSON.stringify(request))
         RequestGame()
     }
-    server.onmessage = function(data) {
+    server.onmessage = function(data) { // handles data received from the server
         let parseData = JSON.parse(data.data)
-        console.log(parseData)
         switch (parseData.responseType) {
             case "GAMEOBJECT": {
                 boardArr = parseData.boardArr
