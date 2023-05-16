@@ -1,53 +1,41 @@
-// const server = new WebSocket("wss://home.chessarmies.com:5072")
-
 const joinGame = document.getElementById("joinGame")
 const joinGameClick = document.getElementById("joinClickArea")
 const codeField = document.getElementById("codeField")
 const createGame = document.getElementById("createGame")
 const codeBox = document.getElementById("codeBox")
 const codeCharSet = "ABCDEFGHJKLMNOPQRSTUVWXYZ1234567890"
+const loading = '    <div id="loading">\
+<div class="trapezium" id="tr0"></div>\
+<div class="trapezium" id="tr1"></div>\
+<div class="trapezium" id="tr2"></div>\
+<div class="trapezium" id="tr3"></div>\
+<div class="trapezium" id="tr4"></div>\
+<div class="trapezium" id="tr5"></div>\
+<div class="trapezium" id="tr6"></div>\
+<div class="trapezium" id="tr7"></div>\
+<div class="trapezium" id="tr8"></div>\
+<div class="trapezium" id="tr9"></div>\
+<div class="trapezium" id="tr10"></div>\
+<div class="trapezium" id="tr11"></div>\
+<div class="trapezium" id="tr12"></div>\
+</div>"'
 
-// function SendEnteredCode() {
-//     codeField.value = codeField.value.toUpperCase()
-//     codeField.value = codeField.value.replaceAll("O", "0")
-//     if (codeField.value.length == 8) {
-//         for (i = 0; i < 8; i++) {
-//             if (!codeCharSet.includes(codeField.value[i])) {
-//                 IncorrectCode()
-//                 return
-//             }
-//         }
-//         request = {
-//             requestType: "JOIN",
-//             gameCode: codeField.value,
-//             UUID: RetrieveCookie("UUID"),
-//         }
-//         server.send(JSON.stringify(request))
-//     } else {
-//         IncorrectCode() 
-//     }
-// }
 
 function JoinGameHandler() {
-    console.log(this)
     var response = JSON.parse(this.responseText)
     if (response.responseType == "NOGAMEFOUND") {
         IncorrectCode()
     } else {
+        ResetCreateClick()
+        ResetJoinClick()
         window.location.href = "https://chessarmies.com/play.html"
     }
 }
 
-function SendEnteredCode() {
-    codeField.value = codeField.value.toUpperCase()
-    codeField.value = codeField.value.replaceAll("O", "0")
-    var enterCodeReq = new XMLHttpRequest()
-    enterCodeReq.open("POST", "https://home.chessarmies.com:5072")
-    enterCodeReq.withCredentials = true
-    enterCodeReq.addEventListener("load", JoinGameHandler)
-    enterCodeReq.addEventListener("abort", IncorrectCode)
-    enterCodeReq.addEventListener("error", IncorrectCode)
-    if (codeField.value.length == 8) {
+function SendEnteredCode() { // sends the code entered into the code box to the server to request joining the corresponding game
+    codeField.value = codeField.value.toUpperCase() // capitalises all letters
+    codeField.value = codeField.value.replaceAll("O", "0") // replaces all "O" with "0"
+    if (codeField.value.length == 8) { // checks the event is the correct length
         for (i = 0; i < 8; i++) {
             if (!codeCharSet.includes(codeField.value[i])) {
                 IncorrectCode()
@@ -57,72 +45,43 @@ function SendEnteredCode() {
         request = {
             requestType: "JOIN",
             gameCode: codeField.value,
-            // UUID: RetrieveCookie("UUID"),
         }
-        // server.send(JSON.stringify(request))
+        var enterCodeReq = new XMLHttpRequest() // sets up the HTTPS request
+        enterCodeReq.open("POST", "https://home.chessarmies.com:5072")
+        enterCodeReq.withCredentials = true
+        joinGameClick.innerHTML = loading
+        joinGameClick.children[0].classList.add("lr")
+        enterCodeReq.addEventListener("load", JoinGameHandler) // sets up event handlers for receiving the response from the server
+        enterCodeReq.addEventListener("abort", IncorrectCode)
+        enterCodeReq.addEventListener("error", IncorrectCode)
         enterCodeReq.send(JSON.stringify(request))
     } else {
         IncorrectCode() 
     }
 }
 
-
-// function RetrieveCookie(type) {
-//     let cookies = getCookies()
-//     if (type == "UUID") {
-//         let UUID = cookies.UUID
-//         return UUID
-//     } else if (type == "gameCode") {
-//         let gameCode = cookies.gameCode
-//         return gameCode
-//     } else {
-//         return gameCode, UUID
-//     }
-// }
-
-// function requestSessionID() {
-//     request = {
-//         requestType: "REQUESTUUID",
-//     }
-//     server.send(JSON.stringify(request))
-// }
-
 function IncorrectCode() {
     joinGame.classList.add("incorrectCode")
     setTimeout(function() {
         joinGame.classList.remove("incorrectCode")
     },400)
-    joinGameClick.onclick = function() {
-        joinGameClick.onclick = null
-        console.log(joinGameClick.onclick)
-        SendEnteredCode()
-    }
-    console.log(joinGameClick.onclick)
-}
-
-// codeBox.onclick = null
-
-createGame.onmouseover = function() {
-    document.getElementById("createButtonHoverPadding").classList.add("hoverFloat")
+    ResetJoinClick()
 }
 
 joinGameClick.onclick = function() {
     joinGameClick.onclick = function() {
         joinGameClick.onclick = null
-        console.log(joinGameClick.onclick)
         SendEnteredCode()
     }
-    console.log(codeField.value)
     joinGame.classList.add("enterButtonClicked")
     codeBox.classList.remove("moveUp")
-    codeBox.classList.add("moveDown")
-    setTimeout(function() {
-        codeBox.classList.remove("behind")
-        },200)
+    // codeBox.classList.add("moveDown")
+    // setTimeout(function() {
+    //     codeBox.classList.remove("behind")
+    //     },200)
 }
 
 codeField.onkeydown = function(keyboardEvent) {
-    console.log(keyboardEvent)
     if (keyboardEvent.key == "Enter") {
         if (joinGameClick.onclick != null) {
             joinGameClick.onclick()
@@ -130,27 +89,11 @@ codeField.onkeydown = function(keyboardEvent) {
     }
 }
 
-// server.onopen = function(event) {
-//     server.onmessage = function(data) {
-//         let parseData = JSON.parse(data.data)
-//         console.log(parseData)
-//         switch (parseData.responseType) {
-//             case "JOINGAME": {
-//                 createGameCookie(parseData.gameCode, "gameCode")
-//                 createGameCookie(parseData.UUID, "UUID")
-//                 window.location.href = "https://chessarmies.com/play/"
-//                 break
-//             }
-//             case "NOGAMEFOUND": {
-//                 IncorrectCode()
-//                 break
-//             }
-//         }
-//     }
-// }
-
 function ResetCreateClick() {
+    createGame.innerHTML = '<h1 class="buttonTitle">Create a room</h1>'
     createGame.onclick = function() {
+        createGame.innerHTML = loading
+        createGame.children[0].classList.add("lc")
         createGame.onclick = null
         var joinGameReq = new XMLHttpRequest()
         joinGameReq.open("POST", "https://home.chessarmies.com:5072")
@@ -165,7 +108,16 @@ function ResetCreateClick() {
     }    
 }
 
+function ResetJoinClick() {
+    joinGameClick.innerHTML = '<h1 class="buttonTitle">Join a room</h1>'
+    joinGameClick.onclick = function() {
+        joinGameClick.onclick = null
+        SendEnteredCode()
+    }
+}
+
 createGame.onclick = function() {
+    createGame.innerHTML = loading
     createGame.onclick = null
     var joinGameReq = new XMLHttpRequest()
     joinGameReq.open("POST", "https://home.chessarmies.com:5072")

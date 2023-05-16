@@ -3,11 +3,11 @@
 }
 
 @keyframes horizontal-shaking {
-    0% { transform: translateX(0) }
-    25% { transform: translateX(5px) }
-    50% { transform: translateX(-5px) }
-    75% { transform: translateX(5px) }
-    100% { transform: translateX(0) }
+    0% { transform: scale(1.2) translateX(0) }
+    25% { transform: scale(1.2) translateX(5px) }
+    50% { transform: scale(1.2) translateX(-5px) }
+    75% { transform: scale(1.2) translateX(5px) }
+    100% { transform: scale(1.2) translateX(0) }
 }
 
 body {
@@ -55,6 +55,8 @@ h3 {
     margin-left: 10%;
     margin-right: 10%;
     background-clip: content-box;
+    outline: none;
+    border: none;
 }
 
 #title {
@@ -63,6 +65,28 @@ h3 {
     width: 100vw;
     justify-content: center;
 }
+
+#titleBG {
+    background-size: cover;
+    background: linear-gradient(90deg, white, black 50%, white 50%);
+    background-size: 200% auto; /* THIS IS THE IMPORTANT LINE (200% NOT 100%) */
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: shine 2s linear infinite;
+    background-position: 50%;
+}
+
+@keyframes shine {
+    /* 0% { background-position: 50% }
+    50% { background-position: -50% }
+    100% { background-position: -150% } this does the same as the lines underneath (when the lines underneath have the     background-position: 50%; line in #titleBG */
+    to {
+        background-position: -150% center;
+    }
+}
+
+
 
 #buttons {
     display: flex;
@@ -76,21 +100,25 @@ h3 {
 
 .moveUp {
     display: none;
-    bottom: 100%;
-    transition: 0.2s;
+    /* bottom: 100%;
+    transition: 0.2s; */
 }
 
-.moveDown {
+/* .moveDown {
     bottom: 100%;
     animation: popup 0.2s forwards;
-}
+} */
 
-.behind {
+/* .behind {
     z-index: -1;
-}
+} */
 
 #codeBox {
-    background-color: coral;
+    background-color: #2e2e2e;
+    border: none;
+    outline: none;
+    border-radius: 0%;
+    color: wheat;
     position: relative;
     width: 100%;
 }
@@ -102,22 +130,46 @@ h3 {
 }
 
 #codeText {
+    color: navajowhite;
     margin-top: 1%;
     margin-bottom: 0;
     margin-left: 1.5%;
 }
 
-.enterButton:hover,.enterButtonClicked {
-    padding-bottom: 10vh;
+.enterButtonClicked {
+    transform: scale(1.2);
 }
 
-.enterButton:focus {
-    margin-bottom: 10vh;
+.enterButton:focus, .enterButton:hover {
+    transform: scale(1.2);
+    background-color: #5f5f5f;
+    background-size: 20vw 20vw;
+}
+
+#createGame:hover, #createGame:focus {
+    background-image: url("pieces/Create.png");
+    /* padding-left: 20vw; */
+}
+
+#joinGame:hover, #joinGame:focus {
+    background-image: url("pieces/Join.png");
+    /* padding-right: 20vw; */
+}
+
+#titlePawnWhite {
+    height: 4vh;
+    transform: translateY(0.4vh) rotate(-30deg);
+}
+
+#titlePawnBlack {
+    height: 4vh;
+    transform: translateY(0.4vh) rotate(30deg);
 }
 
 .incorrectCode {
     animation: horizontal-shaking 0.4s forwards;
-    background-color: red;
+    background-image: none !important;
+    background-color: red !important;
     color: rgb(63, 63, 63);
 }
 
