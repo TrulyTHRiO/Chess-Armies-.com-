@@ -114,6 +114,7 @@ h3 {
 } */
 
 #codeBox {
+    height: 4vw;
     background-color: #2e2e2e;
     border: none;
     outline: none;

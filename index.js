@@ -18,8 +18,7 @@ const loading = '    <div id="loading">\
 <div class="trapezium" id="tr10"></div>\
 <div class="trapezium" id="tr11"></div>\
 <div class="trapezium" id="tr12"></div>\
-</div>"'
-
+</div>'
 
 function JoinGameHandler() {
     var response = JSON.parse(this.responseText)
@@ -51,6 +50,7 @@ function SendEnteredCode() { // sends the code entered into the code box to the 
         enterCodeReq.withCredentials = true
         joinGameClick.innerHTML = loading
         joinGameClick.children[0].classList.add("lr")
+        codeBox.classList.add("loadingPad")
         enterCodeReq.addEventListener("load", JoinGameHandler) // sets up event handlers for receiving the response from the server
         enterCodeReq.addEventListener("abort", IncorrectCode)
         enterCodeReq.addEventListener("error", IncorrectCode)
@@ -91,33 +91,21 @@ codeField.onkeydown = function(keyboardEvent) {
 
 function ResetCreateClick() {
     createGame.innerHTML = '<h1 class="buttonTitle">Create a room</h1>'
-    createGame.onclick = function() {
-        createGame.innerHTML = loading
-        createGame.children[0].classList.add("lc")
-        createGame.onclick = null
-        var joinGameReq = new XMLHttpRequest()
-        joinGameReq.open("POST", "https://home.chessarmies.com:5072")
-        joinGameReq.withCredentials = true
-        joinGameReq.addEventListener("load", JoinGameHandler)
-        joinGameReq.addEventListener("abort", ResetCreateClick)
-        joinGameReq.addEventListener("error", ResetCreateClick)
-        request = {
-            requestType: "CREATE",
-        }
-        joinGameReq.send(JSON.stringify(request))
-    }    
+    createGame.onclick = createGameOnclick 
 }
 
 function ResetJoinClick() {
     joinGameClick.innerHTML = '<h1 class="buttonTitle">Join a room</h1>'
+    codeBox.classList.remove("loadingPad")
     joinGameClick.onclick = function() {
         joinGameClick.onclick = null
         SendEnteredCode()
     }
 }
 
-createGame.onclick = function() {
+createGameOnclick = function() {
     createGame.innerHTML = loading
+    createGame.children[0].classList.add("lc")
     createGame.onclick = null
     var joinGameReq = new XMLHttpRequest()
     joinGameReq.open("POST", "https://home.chessarmies.com:5072")
@@ -130,3 +118,5 @@ createGame.onclick = function() {
     }
     joinGameReq.send(JSON.stringify(request))
 }
+
+createGame.onclick = createGameOnclick

@@ -27,6 +27,11 @@
     padding: 0;
     /* margin-left: -1vw; /* 2*border-top + border-left/2 */ /* -(border-left + width/2) + ((height + border-top)/2 OR whatever you want to move the thing into the middle of the box (half the box width for eg.) */
     margin-top: 3.75vw; /* 10-6.25  because the height of the box is 20vw and half of that is 10, so to get the middle of the circle to the middle of the box we add half of the box height. The -6.25 comes from the circle not having its center positioned on the baseline (top) of the box, rather its top is positioned against the top of the box, so we need to subtract half of the height of the circle ((height + border-top)/2) == 6.25  */
+    height: 100%;
+}
+
+.loadingPad {
+    bottom: -4vw;
 }
 
 .lc {
