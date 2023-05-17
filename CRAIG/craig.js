@@ -33,3 +33,11 @@ document.onkeydown = function(keyboardEvent) {
         }
     }
 }
+
+document.getElementById("reset").onclick = function() {
+    nextCraig = 0
+    score = 0
+    window.localStorage.setItem("CRAIG", 0)
+    document.getElementById("craigletter").innerHTML = craig[nextCraig]
+    document.getElementById("score").innerHTML = 0
+}
