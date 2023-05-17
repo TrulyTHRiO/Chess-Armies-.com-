@@ -134,7 +134,6 @@ html {
 
 .tile {
     user-select: none;
-    /* width: 5em; */
     width: 10vh;
     height: 10vh;
     padding: 0;
@@ -173,14 +172,12 @@ html {
     height: 80%;
     margin: 10%;
     -webkit-user-drag: none;
+    -webkit-user-select: none;
     user-select: none;
 }
 
 #board {
     display: grid;
-    /* width: min-content; */
-    /* grid-template-columns: repeat(8, 80px);
-    gap: 0; */
 }
 
 #turnChange {

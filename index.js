@@ -61,9 +61,11 @@ function SendEnteredCode() { // sends the code entered into the code box to the 
 }
 
 function IncorrectCode() {
-    joinGame.classList.add("incorrectCode")
+    joinGameClick.classList.add("incorrectCode")
+    joinGame.style = "transition: none; background-color: transparent"
     setTimeout(function() {
-        joinGame.classList.remove("incorrectCode")
+        joinGame.style = ""
+        joinGameClick.classList.remove("incorrectCode")
     },400)
     ResetJoinClick()
 }
