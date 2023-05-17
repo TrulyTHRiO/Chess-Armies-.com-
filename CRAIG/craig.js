@@ -1,11 +1,17 @@
 var craig = "CRAIG"
 var nextCraig = 0
+var score = window.localStorage.getItem("CRAIG")
+score == null ? score = 0 : 
 
+document.getElementById("craigletter").innerHTML = craig[score%5]
+nextCraig = score%5
+document.getElementById("score").innerHTML = Math.floor(score/5)
 
 // if (e.key === "Backspace" || e.key === "Delete") {
 //     deleteKey()
 //     return
 // }
+
 
 document.onkeydown = function(keyboardEvent) {
     // console.log(keyboardEvent.key)
@@ -15,6 +21,7 @@ document.onkeydown = function(keyboardEvent) {
         if (keyboardEvent.key.toUpperCase() == craig[nextCraig]) {
             nextCraig == 4 ? nextCraig = 0 : nextCraig++
             document.getElementById("craigletter").innerHTML = craig[nextCraig]
+            window.localStorage.setItem("CRAIG", ++score)
             if (keyboardEvent.key.toUpperCase() == "G") {
                 document.getElementById("score").innerHTML++
             }
