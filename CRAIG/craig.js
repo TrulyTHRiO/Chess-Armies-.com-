@@ -30,6 +30,10 @@ document.onkeydown = function(keyboardEvent) {
             setTimeout(() => {
                 document.getElementsByTagName("body")[0].style = "background-color: black"
             }, 400);
+            score -= score%5
+            document.getElementById("craigletter").innerHTML = "C"
+            nextCraig = 0
+            window.localStorage.setItem("CRAIG", score)
         }
     }
 }
