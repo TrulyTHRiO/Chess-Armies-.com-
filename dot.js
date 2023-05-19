@@ -5,7 +5,7 @@ const boardColours = "wbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbwwbwbwbwbbw
 const boardPieces = "rnbqkbnrpppppppp--------------------------------PPPPPPPPRNBQKBNR" // the order of the pieces on the board at the start of the game - can be changed to allow custom starting positions
 const pieceTimer = 3000 // the timer for each piece - can be changed to change how long before each piece can be moved again
 const boardSize = Math.sqrt(boardColours.length)
-const tileMax = (document.documentElement.clientWidth > document.documentElement.clientHeight ? "vh" : "vw") // determines how the board should be sized based on whether the device is in portrait or landscape
+const tileMax = (document.documentElement.clientWidth > document.documentElement.clientHeight ? "dvh" : "dvw") // determines how the board should be sized based on whether the device is in portrait or landscape
 
 selectedTile = null
 

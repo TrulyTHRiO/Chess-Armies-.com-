@@ -13,15 +13,15 @@ html {
 
 #codeDisplay {
     display: flex;
-    width: 100vw;
-    height: 10vh;
+    width: 100dvw;
+    height: 10dvh;
     justify-content: center;
     align-items: center;
 }
 
 #code {
     font-weight: 800;
-    font-size: 5vh;
+    font-size: 5dvh;
 }
 
 #gameContainer {
@@ -37,8 +37,8 @@ html {
     display: flex;
     align-items: baseline;
     justify-content: center;
-    height: 90vh;
-    width: 60vw;
+    height: 90dvh;
+    width: 60dvw;
     padding: 0;
     margin: 0;
 }
@@ -58,8 +58,8 @@ html {
     justify-content: baseline;
     flex-direction: column;
     padding: 2em;
-    height: 90vh;
-    width: 20vw;
+    height: 90dvh;
+    width: 20dvw;
     background-color: wheat;
     box-sizing: border-box;
     z-index: 1
@@ -71,7 +71,7 @@ html {
     border-style: solid;
     border-color: black;
     width: 100%;
-    height: 8vh;
+    height: 8dvh;
     transition: 0.1s;
 }
 
@@ -95,23 +95,23 @@ html {
 }
 
 #enterNickname {
-    margin: 2vh 0 0 0;
+    margin: 2dvh 0 0 0;
 }
 
 #nicknameField {
     width: 100%;
-    height: 8vh;
+    height: 8dvh;
     margin: 0;
     padding: 0;
     border-width: 2px;
     border-style: solid;
     border-color: black;
     box-sizing: border-box;
-    margin-top: 4vh;
-    margin-bottom: 4vh;
+    margin-top: 4dvh;
+    margin-bottom: 4dvh;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
-    font-size: 2.5vh;
+    font-size: 2.5dvh;
 }
 
 #submitNickname {
@@ -119,9 +119,9 @@ html {
 }
 
 #startGameButton {
-    width: 18vw;
+    width: 18dvw;
     position: absolute;
-    left: 1vh;
+    left: 1dvh;
     background-color: dimgrey;
 }
 
@@ -129,13 +129,13 @@ html {
     color: black;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
-    font-size: 2.5vh;
+    font-size: 2.5dvh;
 }
 
 .tile {
     user-select: none;
-    width: 10vh;
-    height: 10vh;
+    width: 10dvh;
+    height: 10dvh;
     padding: 0;
 }
 
