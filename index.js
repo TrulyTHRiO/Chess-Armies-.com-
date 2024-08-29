@@ -46,7 +46,7 @@ function SendEnteredCode() { // sends the code entered into the code box to the 
             gameCode: codeField.value,
         }
         var enterCodeReq = new XMLHttpRequest() // sets up the HTTPS request
-        enterCodeReq.open("POST", "https://home.chessarmies.com:5072")
+        enterCodeReq.open("POST", "https://home.chessarmies.com:5074")
         enterCodeReq.withCredentials = true
         joinGameClick.innerHTML = loading
         joinGameClick.children[0].classList.add("lr")
@@ -110,7 +110,7 @@ createGameOnclick = function() {
     createGame.children[0].classList.add("lc")
     createGame.onclick = null
     var joinGameReq = new XMLHttpRequest()
-    joinGameReq.open("POST", "https://home.chessarmies.com:5072")
+    joinGameReq.open("POST", "https://home.chessarmies.com:5074")
     joinGameReq.withCredentials = true
     joinGameReq.addEventListener("load", JoinGameHandler)
     joinGameReq.addEventListener("abort", ResetCreateClick)
