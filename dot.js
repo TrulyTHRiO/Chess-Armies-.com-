@@ -1,4 +1,4 @@
-const server = new WebSocket("wss://home.chessarmies.com:5072")
+const server = new WebSocket("wss://home.chessarmies.com:5074")
 
 const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZαβγδεζηθικλμνξοπρστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ" // extra letters are used for boards bigger than 8x8 to allow the code to be extended
 const boardColours = "wbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbwwbwbwbwbbwbwbwbw" // the order of the black and white tiles - can be changed to allow the order of the colours of board tiles to be changed at will for aesthetic purposes
